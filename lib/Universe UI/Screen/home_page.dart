@@ -1,62 +1,60 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_example/Universe%20UI/Model/universe_model.dart';
+import 'package:flutter_example/Universe%20UI/Screen/planet_detail_page.dart';
 import 'package:flutter_swiper_view/flutter_swiper_view.dart';
-import '../Utils/constants.dart';
+import 'package:flutter_example/Universe%20UI/Utils/colors.dart';
 
-import '../Model/universe_model.dart';
-import 'detail_page.dart';
-
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class UniversHomePage extends StatefulWidget {
+  const UniversHomePage({super.key});
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _UniversHomePageState createState() => _UniversHomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _UniversHomePageState extends State<UniversHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: gradientEndColor,
+      backgroundColor: secondGradientColor,
       body: Container(
+        width: double.infinity,
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [
-              gradientStartColor,
-              gradientEndColor,
-            ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            stops: const [0.3, 0.7],
+            colors: [
+              firstGradientColor,
+              secondGradientColor,
+            ],
           ),
         ),
         child: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
+            children: [
+              // top parts
               Padding(
                 padding: const EdgeInsets.only(left: 30),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
+                  children: [
                     const Text(
-                      'Explore',
+                      "Explore",
                       style: TextStyle(
-                        fontSize: 45,
                         color: Colors.white,
+                        fontSize: 45,
                         fontWeight: FontWeight.w900,
                       ),
-                      textAlign: TextAlign.left,
                     ),
                     Row(
                       children: [
                         const Text(
-                          'Solar System',
+                          "Solar System",
                           style: TextStyle(
+                            fontWeight: FontWeight.w500,
                             fontSize: 25,
                             color: Colors.white60,
-                            fontWeight: FontWeight.w500,
                           ),
-                          textAlign: TextAlign.left,
                         ),
                         Icon(
                           Icons.keyboard_arrow_down,
@@ -68,45 +66,45 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
+
+              // body parts
               Container(
                 height: 675,
-                padding: const EdgeInsets.symmetric(horizontal: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 0),
                 child: Swiper(
-                  physics: const BouncingScrollPhysics(),
                   itemCount: planets.length,
-                  itemHeight: 700,
+                  physics: const BouncingScrollPhysics(),
+                  itemHeight: 675,
                   itemWidth: double.infinity,
                   layout: SwiperLayout.TINDER,
                   pagination: const SwiperPagination(
-                    builder: DotSwiperPaginationBuilder(
-                      activeSize: 12,
-                      space: 3,
-                      size: 8,
-                      activeColor: Colors.white,
-                      color: Colors.white24,
-                    ),
-                  ),
+                      builder: DotSwiperPaginationBuilder(
+                    activeSize: 12,
+                    size: 8,
+                    activeColor: Colors.white,
+                    color: Colors.white24,
+                  )),
                   itemBuilder: (context, index) {
-                    return InkWell(
+                    return GestureDetector(
                       onTap: () {
                         Navigator.push(
                           context,
-                          PageRouteBuilder(
-                            pageBuilder: (context, a, b) => DetailPage(
+                          MaterialPageRoute(
+                            builder: (context) => PlanetDetailPage(
                               planetInfo: planets[index],
                             ),
                           ),
                         );
                       },
                       child: Stack(
-                        children: <Widget>[
+                        children: [
                           Column(
-                            children: <Widget>[
+                            children: [
                               const SizedBox(height: 100),
                               Card(
-                                elevation: 8,
+                                elevation: 10,
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(32),
+                                  borderRadius: BorderRadius.circular(30),
                                 ),
                                 color: Colors.white,
                                 child: Padding(
@@ -117,7 +115,7 @@ class _HomePageState extends State<HomePage> {
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
-                                    children: <Widget>[
+                                    children: [
                                       const SizedBox(height: 200),
                                       Text(
                                         planets[index].name,
@@ -127,45 +125,43 @@ class _HomePageState extends State<HomePage> {
                                               Color.fromARGB(255, 71, 69, 95),
                                           fontWeight: FontWeight.w900,
                                         ),
-                                        textAlign: TextAlign.left,
                                       ),
                                       Text(
-                                        'Solar System',
+                                        "Solar System",
                                         style: TextStyle(
                                           fontSize: 30,
                                           color: primaryTextColor,
                                           fontWeight: FontWeight.w500,
                                         ),
-                                        textAlign: TextAlign.left,
                                       ),
-                                      const SizedBox(height: 32),
+                                      const SizedBox(height: 30),
                                       Row(
-                                        children: <Widget>[
+                                        children: [
                                           Text(
-                                            'Know more ',
+                                            "Know more ",
                                             style: TextStyle(
                                               fontSize: 20,
                                               color: secondaryTextColor,
                                               fontWeight: FontWeight.w500,
                                             ),
-                                            textAlign: TextAlign.left,
                                           ),
                                           Icon(
                                             Icons.arrow_forward,
                                             color: secondaryTextColor,
-                                          ),
+                                          )
                                         ],
                                       ),
+                                      const SizedBox(
+                                        height: 20,
+                                      )
                                     ],
                                   ),
                                 ),
                               ),
                             ],
                           ),
-                          Hero(
-                            tag: planets[index].id,
-                            child: Image.asset(planets[index].iconImage),
-                          ),
+                          Hero(tag: planets[index].id,
+                            child: Image.asset(planets[index].iconImage)),
                           Positioned(
                             right: 40,
                             bottom: 120,
@@ -174,9 +170,8 @@ class _HomePageState extends State<HomePage> {
                               style: TextStyle(
                                 fontSize: 260,
                                 color: primaryTextColor.withOpacity(0.1),
-                                fontWeight: FontWeight.w900,
+                                fontWeight: FontWeight.bold,
                               ),
-                              textAlign: TextAlign.left,
                             ),
                           ),
                         ],
@@ -189,36 +184,47 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
+      // bottom parts
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
-          borderRadius: const BorderRadius.vertical(
-            top: Radius.circular(36.0),
-          ),
+          borderRadius: BorderRadius.circular(35),
           color: navBarColor,
         ),
-        padding: const EdgeInsets.all(24),
+        padding: const EdgeInsets.all(25),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            IconButton(
-              icon: Image.asset('image/menu_icon.png'),
-              onPressed: () {},
+          children: [
+            Row(
+              children: [
+                IconButton(
+                  onPressed: () {},
+                  icon: Image.asset("image/menu_icon.png"),
+                ),
+                const Text(
+                  "Explore",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+                ),
+              ],
             ),
             IconButton(
+              onPressed: () {},
               icon: Icon(
                 Icons.search,
-                color: Colors.pink[100],
                 size: 30,
+                color: Colors.pink[100],
               ),
-              onPressed: () {},
             ),
             IconButton(
+              onPressed: () {},
               icon: Icon(
                 Icons.person_outline_outlined,
                 size: 30,
                 color: Colors.pink[100],
               ),
-              onPressed: () {},
             ),
           ],
         ),

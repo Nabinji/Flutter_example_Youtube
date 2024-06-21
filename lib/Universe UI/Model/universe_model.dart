@@ -13,7 +13,7 @@ class PlanetInfo {
     required this.images,
   });
 }
-
+// this is our model data for planets
 List<PlanetInfo> planets = [
   PlanetInfo(
     id: 1,

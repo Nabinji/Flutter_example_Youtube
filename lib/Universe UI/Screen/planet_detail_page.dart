@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import '../Utils/constants.dart';
-import '../Model/universe_model.dart';
+import 'package:flutter_example/Universe%20UI/Model/universe_model.dart';
+import 'package:flutter_example/Universe%20UI/Utils/colors.dart';
 
-class DetailPage extends StatefulWidget {
+class PlanetDetailPage extends StatefulWidget {
   final PlanetInfo planetInfo;
-
-  const DetailPage({super.key, required this.planetInfo});
+  const PlanetDetailPage({super.key, required this.planetInfo});
 
   @override
-  State<DetailPage> createState() => _DetailPageState();
+  State<PlanetDetailPage> createState() => _PlanetDetailPageState();
 }
 
-class _DetailPageState extends State<DetailPage> {
-  bool _isExpanded = false;
-  void _toggleExpanded() {
+class _PlanetDetailPageState extends State<PlanetDetailPage> {
+  bool _isExpandText = false;
+  void toggleExpanded() {
     setState(() {
-      _isExpanded = !_isExpanded;
+      _isExpandText =
+          !_isExpandText; // first click expand second click back to same position
     });
   }
 
@@ -23,9 +23,8 @@ class _DetailPageState extends State<DetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        bottom: false,
         child: Stack(
-          children: <Widget>[
+          children: [
             SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,7 +33,7 @@ class _DetailPageState extends State<DetailPage> {
                     padding: const EdgeInsets.all(30.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
+                      children: [
                         const SizedBox(height: 280),
                         Text(
                           widget.planetInfo.name,
@@ -45,19 +44,19 @@ class _DetailPageState extends State<DetailPage> {
                           ),
                         ),
                         Text(
-                          'Solar System',
+                          "Solar System",
                           style: TextStyle(
                             fontSize: 35,
                             color: primaryTextColor,
                           ),
                         ),
-                          const SizedBox(height: 5),
+                        const SizedBox(height: 5),
                         const Divider(color: Colors.black12),
                         const SizedBox(height: 20),
                         Text(
                           widget.planetInfo.description,
-                          maxLines: _isExpanded ? null : 5,
-                          overflow: _isExpanded
+                          maxLines: _isExpandText ? null : 5,
+                          overflow: _isExpandText
                               ? TextOverflow.visible
                               : TextOverflow.ellipsis,
                           style: TextStyle(
@@ -67,32 +66,30 @@ class _DetailPageState extends State<DetailPage> {
                           ),
                         ),
                         GestureDetector(
-                          onTap: _toggleExpanded,
+                          onTap: toggleExpanded,
                           child: Text(
-                            _isExpanded ? 'Read less' : 'Read more',
+                            _isExpandText ? "Read less" : "Read more",
                             style: const TextStyle(
-                              fontSize: 18,
-                              color: Colors.orange,
                               fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              color: Colors.amber,
                             ),
                           ),
                         ),
                         const SizedBox(height: 20),
                         const Divider(color: Colors.black12),
-                      
-                        
                       ],
-                      
                     ),
                   ),
-                    Text(
-                    '    Gallery',
+                  Text(
+                    "    Gallery",
                     style: TextStyle(
                       fontSize: 25,
                       color: primaryTextColor,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
+                  const SizedBox(height: 20),
                   Padding(
                     padding: const EdgeInsets.only(left: 30),
                     child: SizedBox(
@@ -122,30 +119,34 @@ class _DetailPageState extends State<DetailPage> {
               ),
             ),
             Positioned(
-              right: -45,
+              right: -50,
               child: Hero(
                 tag: widget.planetInfo.id,
-                child: Image.asset(widget.planetInfo.iconImage),
+                child: Image.asset(
+                  widget.planetInfo.iconImage,
+                ),
               ),
             ),
             Positioned(
-              top: 60,
-              left: 32,
               child: Text(
                 widget.planetInfo.id.toString(),
                 style: TextStyle(
-                  fontSize: 247,
-                  color: primaryTextColor.withOpacity(0.1),
+                  fontSize: 250,
+                  color: primaryTextColor.withOpacity(
+                    0.1,
+                  ),
                   fontWeight: FontWeight.w900,
                 ),
               ),
             ),
             IconButton(
-              icon: const Icon(Icons.arrow_back_ios),
               onPressed: () {
                 Navigator.pop(context);
               },
-            ),
+              icon: const Icon(
+                Icons.arrow_back_ios,
+              ),
+            )
           ],
         ),
       ),
