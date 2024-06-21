@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_view/flutter_swiper_view.dart';
-import 'constants.dart';
+import '../Utils/constants.dart';
 
-import 'Model/universe_model.dart';
+import '../Model/universe_model.dart';
 import 'detail_page.dart';
 
 class HomePage extends StatefulWidget {
