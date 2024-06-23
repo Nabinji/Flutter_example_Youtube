@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_example/Universe%20UI/Screen/home_page.dart';
+import 'package:flutter_example/Snaken%20Game/snake_game.dart';
+
 
 
 
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: UniversHomePage(),
+      home: SnakeGamePage(),
     );
   }
 }
