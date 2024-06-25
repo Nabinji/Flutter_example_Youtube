@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_example/Snaken%20Game/snake_game.dart';
+import 'package:flutter_example/hover_on_icon_animation.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SnakeGamePage(),
+      home: BeautifulSocialIcon(),
     );
   }
 }

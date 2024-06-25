@@ -42,6 +42,7 @@ dependencies:
   flutter_swiper_view: ^1.1.8
   dash_chat_2: ^0.0.21
   chat_gpt_sdk: ^3.0.4
+  font_awesome_flutter: ^10.7.0
 
 dev_dependencies:
   flutter_test:
