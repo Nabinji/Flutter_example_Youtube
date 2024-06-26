@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_example/hover_on_icon_animation.dart';
+import 'package:flutter_example/Hover%20Animation/hover_to_expand.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: BeautifulSocialIcon(),
+      home: HoverToExpand(),
     );
   }
 }
