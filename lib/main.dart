@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_example/parallax_effect.dart';
+import 'package:flutter_example/Hover%20Effect/card_hover_animation.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: ParallaxEffect(),
+      home: CardHoverAnimation(),
     );
   }
 }

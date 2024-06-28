@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_example/Hover%20Animation/model.dart';
+import 'package:flutter_example/Hover%20Effect/model.dart';
 
 // Main HoverToExpand widget which holds a list of HoverItem widgets
 class HoverToExpand extends StatefulWidget {
