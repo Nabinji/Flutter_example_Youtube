@@ -6,34 +6,33 @@ class CardHoverAnimation extends StatefulWidget {
   @override
   State<CardHoverAnimation> createState() => _CardHoverAnimationState();
 }
+
 class _CardHoverAnimationState extends State<CardHoverAnimation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blue[50],
       body: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            HoverCard(
-              name: 'Ellyse Perry',
-              image:
-                  'https://content.api.news/v3/images/bin/767ef800ed57ed5f29ad91a28d4e60ee',
+            CardHover(
+              name: "Ellyse Perry",
               backgroundColor: Colors.pink[300]!,
               buttonColor: Colors.pink,
+              image: "https://content.api.news/v3/images/bin/767ef800ed57ed5f29ad91a28d4e60ee",
             ),
-            HoverCard(
-              name: 'Emma Grace',
-              image:
-                  'https://i0.wp.com/www.wonderslist.com/wp-content/uploads/2020/05/Jessica-Alba-USA.jpg?resize=662%2C373&ssl=1',
+             CardHover(
+              name: "Emma Grace",
               backgroundColor: Colors.blue[300]!,
               buttonColor: Colors.blue,
+              image: "https://thumbs.dreamstime.com/b/beautiful-girl-walking-city-37813935.jpg",
             ),
-            HoverCard(
-              name: 'Sophia Smith',
-              image:
-                  'https://thumbs.dreamstime.com/b/beautiful-girl-walking-city-37813935.jpg',
+             CardHover(
+              name: "Sophia Smith",
               backgroundColor: Colors.purple[300]!,
               buttonColor: Colors.purple,
+              image: "https://i0.wp.com/www.wonderslist.com/wp-content/uploads/2020/05/Jessica-Alba-USA.jpg?resize=662%2C373&ssl=1",
             ),
           ],
         ),
@@ -42,146 +41,143 @@ class _CardHoverAnimationState extends State<CardHoverAnimation> {
   }
 }
 
-class HoverCard extends StatefulWidget {
-  final String image;
+class CardHover extends StatefulWidget {
   final Color backgroundColor;
   final String name;
+  final String image;
   final Color buttonColor;
-  
-  const HoverCard({
+  const CardHover({
     super.key,
+    required this.backgroundColor,
     required this.name,
     required this.image,
-    required this.backgroundColor,
     required this.buttonColor,
   });
 
   @override
-  State<HoverCard> createState() => _HoverCardState();
+  State<CardHover> createState() => _CardHoverState();
 }
-class _HoverCardState extends State<HoverCard> {
-  bool isHovered = false; // Boolean to track if the card is hovered
 
+class _CardHoverState extends State<CardHover> {
+  bool isHovered = false; // Boolean to track if the card is hovered or not
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
       child: MouseRegion(
-        // MouseRegion widget to detect mouse enter and exit events
+        // MouseRegion widget to detect mouse eneter and exit events
         onEnter: (event) {
           setState(() {
-            isHovered = true; // Set isHovered to true when mouse enters
+            isHovered = true; // set isHovered to true when mouse enters
           });
         },
         onExit: (event) {
           setState(() {
-            isHovered = false; // Set isHovered to false when mouse exits
+            isHovered = false; // set isHovered to false when  mouse exits
           });
         },
         child: Stack(
           clipBehavior: Clip.none,
           children: [
-             // Animated container for the card background
+            //Animated container for the card background
             AnimatedContainer(
-             
-              duration: const Duration(milliseconds: 375),
-              height: isHovered ? 300.0 : 280.0, // Change height when hovered
-              width: 220.0,
+              duration: const Duration(milliseconds: 350),
+              height: isHovered
+                  ? 300
+                  : 280, // change height from 280 to 300 if hover
+              width: 220,
               decoration: BoxDecoration(
                 color: widget.backgroundColor,
-                borderRadius: BorderRadius.circular(20.0),
+                borderRadius: BorderRadius.circular(20),
               ),
             ),
-              // Animated positioning of the inner container
+            // Animated positioning of the inner container
             AnimatedPositioned(
-            
-              duration: const Duration(milliseconds: 375),
-              curve: Curves.easeOut,
-              top: isHovered ? -100.0 : 0.0, // if hover Move up otherwise at original position
-               // Inner container with image and text
+              duration: const Duration(milliseconds: 350),
+              top: isHovered
+                  ? -100
+                  : 0, // if hover then move up to 100 otherwise at original position
+              // inner container for image and text
               child: AnimatedContainer(
-               
-                duration: const Duration(milliseconds: 375),
-                curve: Curves.easeOut,
-                height: isHovered ? 400.0 : 280.0, // Change height when hovered
-                width: 220.0,
+                duration: const Duration(milliseconds: 350),
+                height: isHovered ? 400 : 280, // change the height when hovered
+                width: 220,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    // for image
                     Padding(
                       padding: const EdgeInsets.all(10),
-                      // Animated container for the image
+                      // animated container for the image
                       child: AnimatedContainer(
-                        
-                        duration: const Duration(milliseconds: 375),
-                        curve: Curves.easeOut,
-                        height: isHovered ? 180.0 : 200.0, // Change size when hovered
-                        width: isHovered ? 180.0 : 200.0, // Change size when hovered
+                        duration: const Duration(microseconds: 350),
+                        height: isHovered ? 180 : 200,
+                        width: isHovered ? 180 : 200,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20.0),
+                          borderRadius: BorderRadius.circular(20),
                           image: DecorationImage(
-                            image: NetworkImage(widget.image),
+                            image: NetworkImage(
+                              widget.image,
+                            ),
                             fit: BoxFit.cover,
                             alignment: Alignment.topCenter,
                           ),
                         ),
                       ),
                     ),
-                    const SizedBox(height: 5),
+
+                    // for name
+                    const SizedBox(height: 10),
                     Text(
-                      // Name of the person
                       widget.name,
                       style: const TextStyle(
-                        fontSize: 25.0,
                         fontWeight: FontWeight.bold,
+                        fontSize: 25,
                         color: Colors.white,
                       ),
                     ),
+                      const SizedBox(height: 9),
+                    //  for some info
                     Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              const Text(
-                                
-                                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, \nsed do eiusmod tempor incididunt ut labore et',
-                                textAlign: TextAlign.center,
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            const Text(
+                              " Lorem ipsum dolor sit amet, consectetur adipiscing elit, \nsed do eiusmod tempor incididunt ut labore et",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 15,
+                                color: Colors.white,
+                              ),
+                            ),
+                            const SizedBox(height: 15),
+                            // for read more button
+                            TextButton(
+                              style: TextButton.styleFrom(
+                                backgroundColor: widget.buttonColor,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                padding: const EdgeInsets.all(15),
+                              ),
+                              onPressed: () {},
+                              child: const Text(
+                                "Read more",
                                 style: TextStyle(
-                                  fontSize: 15.5,
-                                  fontWeight: FontWeight.w500,
+                                  fontSize: 16,
                                   color: Colors.white,
                                 ),
                               ),
-                              const SizedBox(height: 15.0),
-                                // Read More button
-                              TextButton(
-                              
-                                style: TextButton.styleFrom(
-                                  backgroundColor: widget.buttonColor,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                  ),
-                                  padding: const EdgeInsets.all(15),
-                                ),
-                                onPressed: () {},
-                                child: const Text(
-                                  'Read More',
-                                  style: TextStyle(
-                                    fontSize: 15.0,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
                   ],
                 ),
               ),
-            ),
+            )
           ],
         ),
       ),
