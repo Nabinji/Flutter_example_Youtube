@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_example/MacOs%20Like%20Animation/effect_like_macos.dart';
-import 'package:provider/provider.dart';
-import 'MacOs Like Animation/color_palette.dart';
+import 'package:flutter_example/custom_nav_bar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,23 +11,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      // Provides an instance of ColorPaletteState to the widget tree
-      create: (context) => ColorPaletteState(),
-      builder: (context, child) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            // Uses the selected color from ColorPaletteState to create a color scheme
-            colorScheme: ColorScheme.fromSeed(
-              seedColor: context.watch<ColorPaletteState>().selectedColor.color,
-              primary: context.watch<ColorPaletteState>().selectedColor.color,
-            ),
-            useMaterial3: true,
-          ),
-          home: const EffectLikeMacos(), // Sets the home widget
-        );
-      },
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: CustomDropDownWithHoverEffect(),
     );
   }
 }
