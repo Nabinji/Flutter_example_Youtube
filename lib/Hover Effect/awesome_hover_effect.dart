@@ -8,47 +8,42 @@ class AwesomeHoverEffect extends StatefulWidget {
 }
 
 class _AwesomeHoverEffectState extends State<AwesomeHoverEffect> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  bool isHovered = false;
-
+  bool isHover = false; // initial isHover is false
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: MouseRegion(
-          onEnter: (value) {
+          onEnter: (event) {
             setState(() {
-              isHovered = true; // set isHovered to true when mouse enters
+              isHover = true; // set isHovered to true when mouse enters
             });
           },
-          onExit: (value) {
+          onExit: (event) {
             setState(() {
-              isHovered = false; // set isHovered to false when mouse exit
+              isHover = false; // set isHovered to false when mouse exit
             });
           },
           child: Container(
-            height: 400.0,
-            width: 300.0,
+            height: 400,
+            width: 300,
             decoration: BoxDecoration(
               color: Colors.black87,
-              borderRadius: BorderRadius.circular(30.0),
+              borderRadius: BorderRadius.circular(30),
             ),
             child: Stack(
               children: [
                 // Display text or logo based on hover state
                 Positioned(
-                  left: 20.0,
-                  top: 190.0,
-                  child: isHovered
+                  left: 30,
+                  top: 190,
+                  // this concept is => if mouse hover is false then show logo otherwise show the text
+                  child: isHover
                       ? const Text(
-                          'Nike',
+                          "Nike",
                           style: TextStyle(
                             fontWeight: FontWeight.w900,
-                            fontSize: 120.0,
+                            fontSize: 120,
                             color: Colors.grey,
                           ),
                         )
@@ -56,35 +51,34 @@ class _AwesomeHoverEffectState extends State<AwesomeHoverEffect> {
                           "image/nikelogo.png",
                           height: 240,
                           color: Colors.grey,
+                          fit: BoxFit.cover,
                         ),
                 ),
-                // Animated circle background
+                // Animated cirlular Background
                 AnimatedPositioned(
+                  curve: Curves.easeIn,
+                  top: isHover ? -240 : -80,
+                  right: isHover ? -100 : -80,
                   duration: const Duration(milliseconds: 600),
-                  curve: Curves.easeOut,
-                  top: isHovered ? -240.0 : -80.0,
-                  right: isHovered ? -100.0 : -80.0,
                   child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 600),
-                    curve: Curves.easeOut,
-                    height: isHovered ? 450.0 : 280.0,
-                    width: isHovered ? 450.0 : 280.0,
+                    height: isHover ? 450 : 280,
+                    width: isHover ? 450 : 280,
                     decoration: const BoxDecoration(
                       color: Colors.blue,
                       shape: BoxShape.circle,
                     ),
+                    duration: const Duration(milliseconds: 600),
                   ),
                 ),
                 // Animated shoe image
                 AnimatedAlign(
-                  duration: const Duration(milliseconds: 375),
-                  curve: Curves.easeOut,
-                  alignment: isHovered
-                      ? const Alignment(0.0, -0.9)
-                      : const Alignment(0.0, -0.3),
+                  alignment: isHover
+                      ? const Alignment(0, -0.9)
+                      : const Alignment(0, -0.3),
+                  duration: const Duration(milliseconds: 400),
                   child: SizedBox(
                     height: 200,
-                    width: 200.0,
+                    width: 200,
                     child: Image.asset(
                       "image/shoe.png",
                       fit: BoxFit.cover,
@@ -95,84 +89,83 @@ class _AwesomeHoverEffectState extends State<AwesomeHoverEffect> {
                 AnimatedPositioned(
                   duration: const Duration(milliseconds: 800),
                   curve: Curves.easeOut,
-                  bottom: isHovered ? 0.0 : -130.0,
+                  bottom: isHover ? 0 : -120,
                   child: SizedBox(
-                    height: 200.0,
-                    width: 300.0,
+                    height: 200,
+                    width: 300,
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         const Text(
-                          'Air Max',
+                          "AirMax",
                           style: TextStyle(
-                            fontSize: 30.0,
+                            fontSize: 30,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),
                         ),
-                        const SizedBox(height: 5.0),
-                        // Animated size buttons
+                        const SizedBox(height: 5),
+                        // Animated Size buttons
                         AnimatedOpacity(
-                          opacity: isHovered ? 1.0 : 0.0,
-                          duration: isHovered
+                          opacity: isHover ? 1 : 0,
+                          duration: isHover
                               ? const Duration(milliseconds: 600)
                               : const Duration(milliseconds: 400),
-                          curve:
-                              isHovered ? Curves.easeInOutBack : Curves.easeOut,
+                          curve: isHover ? Curves.easeInOut : Curves.easeOut,
                           child: const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                'Size: ',
+                                "Size:",
                                 style: TextStyle(
-                                  fontSize: 18.0,
+                                  fontSize: 18,
                                   color: Colors.white,
                                 ),
                               ),
-                              SizeButton(value: '10'),
-                              SizeButton(value: '11'),
-                              SizeButton(value: '12'),
-                              SizeButton(value: '13'),
+                              SizeButton(value: "10"),
+                              SizeButton(value: "11"),
+                              SizeButton(value: "12"),
+                              SizeButton(value: "13"),
                             ],
                           ),
                         ),
-                        const SizedBox(height: 5.0),
-                        // Animated color options
+                        const SizedBox(height: 5),
+                        // Animated color option
                         AnimatedOpacity(
-                          opacity: isHovered ? 1.0 : 0.0,
-                          duration: isHovered
+                          opacity: isHover ? 1 : 0,
+                          duration: isHover
                               ? const Duration(milliseconds: 1000)
                               : const Duration(milliseconds: 400),
                           child: const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                'Color: ',
+                                "Size:",
                                 style: TextStyle(
-                                  fontSize: 18.0,
+                                  fontSize: 18,
                                   color: Colors.white,
                                 ),
                               ),
-                              SizedBox(width: 10.0),
+                              SizedBox(width: 10),
                               CircleAvatar(
-                                radius: 9.0,
+                                radius: 10,
                                 backgroundColor: Colors.white,
                               ),
-                              SizedBox(width: 10.0),
+                              SizedBox(width: 10),
                               CircleAvatar(
-                                radius: 9.0,
-                                backgroundColor: Colors.red,
-                              ),
-                              SizedBox(width: 10.0),
-                              CircleAvatar(
-                                radius: 9.0,
+                                radius: 10,
                                 backgroundColor: Colors.green,
                               ),
+                              SizedBox(width: 10),
+                              CircleAvatar(
+                                radius: 10,
+                                backgroundColor: Colors.red,
+                              )
                             ],
                           ),
                         ),
-                        const SizedBox(height: 20.0),
+                        const SizedBox(height: 20),
                         // Animated buy button
                         const BuyButton(),
                       ],
@@ -189,46 +182,45 @@ class _AwesomeHoverEffectState extends State<AwesomeHoverEffect> {
 }
 
 class SizeButton extends StatefulWidget {
-  final String? value;
-  const SizeButton({super.key, this.value});
+  final String value;
+  const SizeButton({super.key, required this.value});
 
   @override
-  _SizeButtonState createState() => _SizeButtonState();
+  State<SizeButton> createState() => _SizeButtonState();
 }
 
 class _SizeButtonState extends State<SizeButton> {
-  bool isHovered = false;
+  bool isHover = false;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(4.0),
+      padding: const EdgeInsets.all(4),
       child: MouseRegion(
-        onEnter: (value) {
+        onEnter: (event) {
           setState(() {
-            isHovered = true;
+            isHover = true; // set isHovered to true when mouse enters
           });
         },
-        onExit: (value) {
+        onExit: (event) {
           setState(() {
-            isHovered = false;
+            isHover = false; // set isHovered to false when mouse exit
           });
         },
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
-          curve: Curves.easeOut,
-          height: 30.0,
-          width: 30.0,
+          height: 30,
+          width: 30,
           decoration: BoxDecoration(
-            color: isHovered ? Colors.green : Colors.white,
-            borderRadius: BorderRadius.circular(5.0),
+            color: isHover ? Colors.green : Colors.white,
+            borderRadius: BorderRadius.circular(5),
           ),
           child: Center(
             child: Text(
-              widget.value!,
+              widget.value,
               style: TextStyle(
-                color: isHovered ? Colors.white : Colors.black87,
-                fontWeight: FontWeight.w600,
+                color: isHover ? Colors.white : Colors.black87,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
@@ -246,49 +238,44 @@ class BuyButton extends StatefulWidget {
 }
 
 class _BuyButtonState extends State<BuyButton> {
-  bool isHovered = false;
-
+  bool isHover = false;
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
-      onEnter: (value) {
+      onEnter: (event) {
         setState(() {
-          isHovered = true;
+          isHover = true; // set isHovered to true when mouse enters
         });
       },
-      onExit: (value) {
+      onExit: (event) {
         setState(() {
-          isHovered = false;
+          isHover = false; // set isHovered to false when mouse exit
         });
       },
       child: AnimatedPositioned(
-        duration: isHovered
+        bottom: isHover ? 20 : -100,
+        duration: isHover
             ? const Duration(milliseconds: 800)
             : const Duration(milliseconds: 500),
-        bottom: isHovered ? 20.0 : -100.0,
         child: AnimatedOpacity(
-          opacity: 1.0,
-          duration: const Duration(milliseconds: 1075),
-          curve: Curves.easeOut,
+          opacity: 1,
+          duration: Duration(milliseconds: 1100),
           child: SizedBox(
-            width: 320.0,
+            width: 100,
             child: Center(
               child: TextButton(
                 style: TextButton.styleFrom(
-                  foregroundColor: Colors.black87,
-                  backgroundColor: isHovered ? Colors.green : Colors.white,
-                  padding: const EdgeInsets.all(20.0),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5.0),
-                  ),
-                ),
+                    foregroundColor: Colors.black87,
+                    backgroundColor: isHover ? Colors.green : Colors.white,
+                    padding: EdgeInsets.all(20),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    )),
                 onPressed: () {},
                 child: Text(
-                  'Buy Now',
+                  "Buy Now",
                   style: TextStyle(
-                    color: isHovered ? Colors.white : Colors.black,
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.w600,
+                    color: isHover ? Colors.white : Colors.black,
                   ),
                 ),
               ),
