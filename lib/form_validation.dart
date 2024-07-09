@@ -11,111 +11,103 @@ class PasswordFormValidator extends StatefulWidget {
 
 class _PasswordFormValidatorState extends State<PasswordFormValidator> {
   final TextEditingController controller = TextEditingController();
-  bool success = false;
+  bool isSuccess = false; // initially
   bool _obscureText = true;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        centerTitle: true, // for android
         backgroundColor: Colors.blue,
-        foregroundColor: Colors.white,
-        title: const Column(
-          children: [
-            Text(
-              "Password Form Validation",
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-          ],
+        title: const Text(
+          "Password Form Validation",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
         ),
-        centerTitle: true,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(15),
+        padding: EdgeInsets.all(15),
         child: SingleChildScrollView(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                width: double.infinity,
                 height: 200,
-                child: success
+                width: double.infinity,
+                child: isSuccess
                     ? Lottie.network(
-                        "https://lottie.host/c288e345-7b57-45c8-b224-cc6af457bfe0/7wi1v8ZrWM.json",
-                      )
+                        "https://lottie.host/c288e345-7b57-45c8-b224-cc6af457bfe0/7wi1v8ZrWM.json")
                     : Lottie.network(
-                        "https://lottie.host/de8895c3-39b1-488d-8089-d42c697bd7f2/8q4PKhMEyb.json",
-                      ),
+                        "https://lottie.host/de8895c3-39b1-488d-8089-d42c697bd7f2/8q4PKhMEyb.json"),
               ),
               SizedBox(
                 height: 300,
+                width: double.infinity,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     TextField(
-                      controller: controller,
                       obscureText: _obscureText,
+                      controller: controller,
                       decoration: InputDecoration(
                         enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
+                          borderSide: BorderSide(
                             color: Colors.black45,
                             width: 2,
                           ),
                           borderRadius: BorderRadius.circular(20),
                         ),
-                        floatingLabelStyle: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 18,
-                        ),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                              color: success ? Colors.green : Colors.red,
-                              width: 2),
-                          borderRadius: BorderRadius.circular(15),
+                            color: isSuccess ? Colors.green : Colors.red,
+                            width: 3,
+                          ),
+                          borderRadius: BorderRadius.circular(20),
                         ),
                         labelText: "Password",
                         suffixIcon: IconButton(
-                          icon: Icon(
-                            _obscureText
-                                ? Icons.visibility
-                                : Icons.visibility_off,
-                          ),
                           onPressed: () {
                             setState(() {
                               _obscureText = !_obscureText;
                             });
                           },
+                          icon: Icon(
+                            _obscureText
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                          ),
                         ),
                       ),
                     ),
-                    const SizedBox(height: 15),
+                    SizedBox(height: 15),
+                    // the main parts
+                    // validation parts
                     FlutterPwValidator(
                       defaultColor: Colors.grey,
-                      controller: controller,
-                      successColor: Colors.green,
-                      minLength: 8,
                       uppercaseCharCount: 1,
                       lowercaseCharCount: 2,
                       numericCharCount: 1,
-                      specialCharCount: 1,
                       normalCharCount: 3,
+                      specialCharCount: 1,
+
                       width: 350,
                       height: 200,
+                      minLength:
+                          8, // password should be at list 8 character length
                       onSuccess: () {
                         setState(() {
-                          success = true;
+                          isSuccess = true;
                         });
                       },
                       onFail: () {
-                        setState(() {
-                          success = false;
-                        });
+                        isSuccess = false;
                       },
+                      controller: controller,
                     ),
                   ],
                 ),
-              ),
+              )
             ],
           ),
         ),
@@ -123,3 +115,7 @@ class _PasswordFormValidatorState extends State<PasswordFormValidator> {
     );
   }
 }
+/* lottie file link
+https://lottiefiles.com/free-animation/lock-0pPUaBrxWL?from=search
+https://lottiefiles.com/free-animation/lock-blue-JyX7xr7bSs?from=search
+*/

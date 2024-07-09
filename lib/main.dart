@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_example/form_validation.dart';
+import 'package:flutter_example/Ecommerce%20App%20UI/Screen/bottom_app_bar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,9 +11,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return  MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: PasswordFormValidator(),
+      home: MyBottomNavBar(),
     );
   }
 }
