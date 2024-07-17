@@ -1,53 +1,50 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_example/Ecommerce%20App%20UI/Model/category.dart';
+import 'package:flutter_example/Ecommerce%20App%20UI/Screen/detail_screen.dart';
+import 'package:flutter_example/Ecommerce%20App%20UI/Utils/colors.dart';
+import 'package:flutter_example/Ecommerce%20App%20UI/Utils/size.dart';
 import 'package:flutter_svg/svg.dart';
-import '../Model/category.dart';
-import '../Model/product_model.dart';
-import '../Utils/colors.dart';
-import '../Utils/size.dart';
-import 'product_detail.dart';
 
-class MyEcommerceHome extends StatefulWidget {
-  const MyEcommerceHome({super.key});
+import '../Model/product_model.dart';
+
+class EcommerceHomePage extends StatefulWidget {
+  const EcommerceHomePage({super.key});
 
   @override
-  _HomeState createState() => _HomeState();
+  State<EcommerceHomePage> createState() => _EcommerceHomePageState();
 }
 
-class _HomeState extends State<MyEcommerceHome> {
+class _EcommerceHomePageState extends State<EcommerceHomePage> {
   int selectedIndex = 0;
-
+  // list of category items
+  List<List<Product>> selectedCategory = [
+    chairs,
+    sofas,
+    cupboards,
+    table,
+    wardrobe,
+  ];
   @override
   Widget build(BuildContext context) {
-    // Initialize SizeConfig
+    // Initializing SizeConfig
     SizeConfig().init(context);
-// list of category items
-    List<List<Product>> selectcategories = [
-      chairs,
-      sofas,
-      cupboards,
-      table,
-      wardrobe,
-    ];
-
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        centerTitle: false,
         backgroundColor: Colors.white,
+        centerTitle: false,
         title: Padding(
           padding: const EdgeInsets.only(left: 10),
           child: RawMaterialButton(
-            onPressed: () {},
-            constraints: const BoxConstraints(
-              minWidth: 10,
-            ),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(15),
             ),
+            constraints: const BoxConstraints(minWidth: 8),
             fillColor: Colors.white,
-            padding: const EdgeInsets.all(15),
+            padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 18),
+            onPressed: () {},
             child: SvgPicture.asset(
-              'image/ecommerce-image/menu.svg',
+              "image/ecommerce-image/menu.svg",
               width: 20,
             ),
           ),
@@ -56,91 +53,48 @@ class _HomeState extends State<MyEcommerceHome> {
       body: ListView(
         children: [
           const Padding(
-              padding: EdgeInsets.all(25),
-              child: Text(
-                'Discover your best furniture',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 35,
-                ),
-              )),
-
-          // for search bar
+            padding: EdgeInsets.all(25),
+            child: Text(
+              "Discover your best furniture",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 35,
+              ),
+            ),
+          ),
+          // for serach bar
           Padding(
             padding: const EdgeInsets.all(25),
             child: TextField(
               decoration: InputDecoration(
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(
-                    color: Colors.white,
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(
-                    color: Colors.white,
-                  ),
-                ),
-                contentPadding: const EdgeInsets.all(15),
-                fillColor: Colors.grey[100],
-                filled: true,
-                hintText: 'Search',
-                prefixIcon: const Icon(
-                  Icons.search,
-                  size: 30,
-                  color: Colors.black,
-                ),
-              ),
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: const BorderSide(
+                        color: Colors.white,
+                      )),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: const BorderSide(
+                        color: Colors.white,
+                      )),
+                  contentPadding: const EdgeInsets.all(15),
+                  filled: true,
+                  hintText: "Search",
+                  fillColor: Colors.grey[100],
+                  prefixIcon: const Icon(
+                    Icons.search,
+                    size: 30,
+                  )),
             ),
           ),
-
-          // for category ites
-          SizedBox(
-            height: SizeConfig.verticalSize * 7.5,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: categoriesList.length,
-              itemBuilder: (context, index) => Container(
-                padding: EdgeInsets.only(
-                  left: index == 0 ? 25 : 0,
-                  right: 20,
-                ),
-                margin: const EdgeInsets.only(top: 10, bottom: 10),
-                child: ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      selectedIndex = index;
-                    });
-                  },
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(horizontal: 25),
-                    backgroundColor:
-                        selectedIndex == index ? primary : Colors.grey[200],
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    elevation: 0,
-                  ),
-                  child: Text(
-                    categoriesList[index].title,
-                    style: TextStyle(
-                      color: selectedIndex == index ? Colors.white : textGray,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-
+          // for category items
+          categorySelection(),
           Padding(
             padding: const EdgeInsets.all(25),
             child: Row(
               children: [
                 const Text(
-                  'Popular',
+                  "Poular",
                   style: TextStyle(
                     fontWeight: FontWeight.w800,
                     fontSize: 25,
@@ -148,25 +102,26 @@ class _HomeState extends State<MyEcommerceHome> {
                 ),
                 const Spacer(),
                 Text(
-                  'View all',
+                  "View all",
                   style: TextStyle(
                     color: primary,
                     fontWeight: FontWeight.w800,
                     fontSize: 18,
                   ),
-                ),
+                )
               ],
             ),
           ),
-
+          // display the product
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 25,
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: List.generate(selectcategories[selectedIndex].length,
+              children: List.generate(selectedCategory[selectedIndex].length,
                   (index) {
-                final product = selectcategories[selectedIndex][index];
-
+                final product = selectedCategory[selectedIndex][index];
                 return GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -203,22 +158,22 @@ class _HomeState extends State<MyEcommerceHome> {
                                   color: Colors.white,
                                 ),
                                 child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.end,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
                                       product.title,
                                       style: const TextStyle(
-                                        color: Colors.black45,
                                         fontSize: 17,
+                                        color: Colors.black45,
                                       ),
                                     ),
                                     const SizedBox(height: 5),
                                     Text(
                                       product.price,
                                       style: const TextStyle(
-                                        fontWeight: FontWeight.w800,
-                                        fontSize: 20,
-                                      ),
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w800),
                                     ),
                                     const SizedBox(height: 5),
                                   ],
@@ -229,21 +184,19 @@ class _HomeState extends State<MyEcommerceHome> {
                                 bottom: 5,
                                 child: RawMaterialButton(
                                   onPressed: () {},
-                                  constraints: const BoxConstraints(
-                                    minWidth: 0,
-                                  ),
+                                  constraints: const BoxConstraints(minWidth: 0),
                                   shape: const CircleBorder(),
-                                  fillColor: primary,
                                   padding: const EdgeInsets.all(5),
+                                  fillColor: primary,
                                   child: const Icon(
                                     Icons.add,
                                     size: 16,
                                     color: Colors.white,
                                   ),
                                 ),
-                              )
+                              ),
                             ],
-                          ),
+                          )
                         ],
                       ),
                     ),
@@ -254,6 +207,48 @@ class _HomeState extends State<MyEcommerceHome> {
           ),
         ],
       ),
+    );
+  }
+
+  SizedBox categorySelection() {
+    return SizedBox(
+      height: SizeConfig.verticalSize * 7.5,
+      child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: categoriesList.length,
+          itemBuilder: (context, index) {
+            return Container(
+              padding: EdgeInsets.only(
+                left: index == 0 ? 20 : 0,
+                right: 20,
+              ),
+              margin: const EdgeInsets.only(top: 10, bottom: 10),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 25,
+                  ),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15)),
+                  backgroundColor:
+                      selectedIndex == index ? primary : Colors.grey[200],
+                ),
+                onPressed: () {
+                  setState(() {
+                    selectedIndex = index;
+                  });
+                },
+                child: Text(
+                  categoriesList[index].title,
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: selectedIndex == index ? Colors.white : textGray,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            );
+          }),
     );
   }
 }
