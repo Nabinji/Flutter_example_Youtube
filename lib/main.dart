@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_example/Tips%20and%20Tricks/tips_tricks.dart';
+import 'package:flutter_example/Tic-Tac-Toe/tic_tac_toe.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: TipsTricks(),
+      home: TicTacToe(),
     );
   }
 }

@@ -1,7 +1,5 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class AnimatedSearchBar extends StatefulWidget {
   const AnimatedSearchBar({super.key});
