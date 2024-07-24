@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_example/Tic-Tac-Toe/tic_tac_toe.dart';
+import 'package:flutter_example/YouTube%20Video%20Player/youtube_video_player.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: TicTacToe(),
+      home: YoutubeVideoPlayerFlutter(),
     );
   }
 }

@@ -50,6 +50,7 @@ dependencies:
   connectivity_plus: ^6.0.3
   internet_connection_checker: ^1.0.0+1
   local_auth: ^2.2.0
+  youtube_player_flutter: ^8.1.2
 
 dev_dependencies:
   flutter_test:

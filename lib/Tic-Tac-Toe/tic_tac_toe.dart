@@ -8,32 +8,33 @@ class TicTacToe extends StatefulWidget {
 }
 
 class _TicTacToeState extends State<TicTacToe> {
-  // Board state to keep track of moves
-  final List<String> _board = List.filled(9, '');
-  // Current player ('X' or 'O')
-  String _currentPlayer = 'X';
+  // Border state to keep track of moves
+  final List<String> board = List.filled(9, "");
+  // Current player(x or o)
+  String currentPlayer = "X";
   // Variable to store the winner
-  String _winner = '';
+  String winner = "";
   // Flag to indicate a tie
-  bool _isTie = false;
-
-  // Function to handle a player's move
-  _play(int index) {
-    if (_winner != '' || _board[index] != '') {
-      return; // If the game is already won or the cell is not empty, do nothing
+  bool isTie = false;
+  // function to handle a player's move
+  player(int index) {
+    if (winner != '' || board[index] != "") {
+      return; // If the game is already won or the cell is not empty do nothig
     }
-
-    setState(() {
-      _board[index] =
-          _currentPlayer; // Set the current cell to the current player's symbol
-      _currentPlayer =
-          _currentPlayer == 'X' ? 'O' : 'X'; // Switch to the other player
-      _checkForWinner(); // Check if there's a winner or a tie
-    });
+    setState(
+      () {
+        board[index] =
+            currentPlayer; // set the current cell to the current player's symbol
+        currentPlayer = currentPlayer == "X"
+            ? "O"
+            : "X"; // switch to the one to another player
+        checkForWinner();
+      },
+    );
   }
 
-  // Function to check for a winner or a tie
-  _checkForWinner() {
+  // function to check for a winner or a tie
+  checkForWinner() {
     List<List<int>> lines = [
       [0, 1, 2],
       [3, 4, 5],
@@ -44,159 +45,155 @@ class _TicTacToeState extends State<TicTacToe> {
       [0, 4, 8],
       [2, 4, 6],
     ];
-
-    // Check each winning combination
+    // check each winning combination
     for (List<int> line in lines) {
-      String player1 = _board[line[0]];
-      String player2 = _board[line[1]];
-      String player3 = _board[line[2]];
-      if (player1 == '' || player2 == '' || player3 == '') {
-        continue; // If any cell in the combination is empty, skip this combination
+      String player1 = board[line[0]];
+      String player2 = board[line[1]];
+      String player3 = board[line[2]];
+      if (player1 == "" || player2 == "" || player3 == "") {
+        continue; // If any cell in the combination is empty, skip theis combination
       }
       if (player1 == player2 && player2 == player3) {
         setState(() {
-          _winner =
+          winner =
               player1; // If all cells in the combination are the same, set the winner
         });
         return;
       }
     }
-
     // Check for a tie
-    if (!_board.contains('')) {
+    if (!board.contains("")) {
       setState(() {
-        _isTie =
-            true; // If no cells are empty and there's no winner, it's a tie
+        isTie = true; // if no cells are empty and there's no winner it's a tie
       });
     }
   }
 
-  // Function to reset the game state and pay the new game
-  _resetGame() {
+  // function to reset the game state and play the new game
+  resetGame() {
     setState(() {
-      _board.fillRange(0, 9, ''); // Clear the board
-      _currentPlayer = 'X'; // Reset to player 'X'
-      _winner = ''; // Clear the winner
-      _isTie = false; // Clear the tie flag
+      board.fillRange(0, 9, ''); // clear the board
+      currentPlayer = 'X';
+      winner = ''; // clear the winner
+      isTie = false; // clear the tie flag
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.deepPurpleAccent,
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(
-            height: size.height * 0.1,
-          ),
           // Displaying the players
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
                 decoration: BoxDecoration(
-                  boxShadow: const [
-                    BoxShadow(color: Colors.black38, blurRadius: 3)
-                  ],
+                  borderRadius: BorderRadius.circular(10),
                   border: Border.all(
-                    color: _currentPlayer == "X"
+                    color: currentPlayer == "X"
                         ? Colors.amber
                         : Colors.transparent,
                   ),
-                  // color: const Color(0xff332167),
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(10),
-                  ),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.black38,
+                      blurRadius: 3,
+                    ),
+                  ],
                 ),
                 child: const Padding(
-                  padding: EdgeInsets.all(20.0),
+                  padding: EdgeInsets.all(20),
                   child: Column(
                     children: [
                       Icon(
                         Icons.person,
-                        size: 55,
                         color: Colors.white,
+                        size: 55,
                       ),
                       SizedBox(height: 10),
                       Text(
-                        'BOT 1',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 30),
-                      ),
-                      SizedBox(height: 10),
-                      Text(
-                        'X',
+                        "BOT 1",
                         style: TextStyle(
                           fontSize: 30,
                           color: Colors.white,
+                          fontWeight: FontWeight.bold,
                         ),
-                      )
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        "X",
+                        style: TextStyle(
+                          fontSize: 30,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ],
                   ),
                 ),
               ),
-              SizedBox(width: size.width * 0.075),
+              SizedBox(width: size.width * 0.08),
               Container(
                 decoration: BoxDecoration(
-                  boxShadow: const [
-                    BoxShadow(color: Colors.black38, blurRadius: 3)
-                  ],
+                  borderRadius: BorderRadius.circular(10),
                   border: Border.all(
-                    color: _currentPlayer == "O"
+                    color: currentPlayer == "O"
                         ? Colors.amber
                         : Colors.transparent,
                   ),
-                  // color: const Color(0xff332167),
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(10),
-                  ),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.black38,
+                      blurRadius: 3,
+                    ),
+                  ],
                 ),
                 child: const Padding(
-                  padding: EdgeInsets.all(20.0),
+                  padding: EdgeInsets.all(20),
                   child: Column(
                     children: [
                       Icon(
                         Icons.person,
-                        size: 55,
                         color: Colors.white,
+                        size: 55,
                       ),
                       SizedBox(height: 10),
                       Text(
-                        'BOT 2',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 30),
-                      ),
-                      SizedBox(height: 10),
-                      Text(
-                        'O',
+                        "BOT 2",
                         style: TextStyle(
                           fontSize: 30,
                           color: Colors.white,
+                          fontWeight: FontWeight.bold,
                         ),
-                      )
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        "0",
+                        style: TextStyle(
+                          fontSize: 30,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ],
                   ),
                 ),
-              )
+              ),
             ],
           ),
-          SizedBox(
-            height: size.height * 0.04,
-          ),
-          // Display winner message
-          if (_winner != "")
+          SizedBox(height: size.height * 0.04),
+          // Display the winner message
+          if (winner != "")
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  _winner,
+                  winner,
                   style: const TextStyle(
                     fontSize: 35,
                     color: Colors.white,
@@ -204,33 +201,32 @@ class _TicTacToeState extends State<TicTacToe> {
                   ),
                 ),
                 const Text(
-                  ' WON!',
+                  " WON!",
                   style: TextStyle(
                     fontSize: 35,
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
-                )
+                ),
               ],
             ),
           // Display tie message
-          if (_isTie)
+          if (isTie)
             const Text(
-              'It\'s a Tie!',
+              "It's a Tie!",
               style: TextStyle(
                 fontSize: 30,
-                color: Colors.pink,
                 fontWeight: FontWeight.bold,
+                color: Colors.red,
               ),
             ),
-
-          // Game board
+          // for game board
           Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(10),
             child: GridView.builder(
+              itemCount: 9,
               padding: const EdgeInsets.all(10),
               shrinkWrap: true,
-              itemCount: 9,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
                   childAspectRatio: 1,
@@ -239,7 +235,7 @@ class _TicTacToeState extends State<TicTacToe> {
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: () {
-                    _play(index); // Handle player move
+                    player(index);
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -248,9 +244,9 @@ class _TicTacToeState extends State<TicTacToe> {
                     ),
                     child: Center(
                       child: Text(
-                        _board[index],
+                        board[index],
                         style: const TextStyle(
-                          fontSize: 48,
+                          fontSize: 50,
                           color: Colors.white,
                         ),
                       ),
@@ -261,10 +257,10 @@ class _TicTacToeState extends State<TicTacToe> {
             ),
           ),
           // Reset button
-          if (_winner != "" || _isTie)
+          if (winner != "" || isTie)
             ElevatedButton(
-              onPressed: _resetGame, // Reset the game
-              child: const Text('Play Again'),
+              onPressed: resetGame,
+              child: const Text("Play Again"),
             ),
         ],
       ),
