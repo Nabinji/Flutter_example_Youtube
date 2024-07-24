@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
+// Define the main widget for the YouTube video player
 class YoutubeVideoPlayerFlutter extends StatefulWidget {
   const YoutubeVideoPlayerFlutter({super.key});
 
@@ -9,25 +10,41 @@ class YoutubeVideoPlayerFlutter extends StatefulWidget {
       _YoutubeVideoPlayerFlutterState();
 }
 
-// Define the state for the main widget
 class _YoutubeVideoPlayerFlutterState extends State<YoutubeVideoPlayerFlutter> {
-  // URL of the YouTube video
-  final videoLink = "https://youtu.be/9Frle6pMcug";
-  // Controller to manage the YouTube player
+  //URL of th YouTube Video
+  final videoURL = "https://youtu.be/9Frle6pMcug?si=tfYa7LBpU4nCWTaQ";
+  // Controller to manage the Youtube video
   late YoutubePlayerController playerController;
-
   // Initialize the state
   @override
   void initState() {
-    // Extract the video ID from the YouTube URL
-    final videoId = YoutubePlayer.convertUrlToId(videoLink);
-    // Initialize the YouTube player controller with the video ID
+    final videoId = YoutubePlayer.convertUrlToId(videoURL);
+    // Initialize the youtube player controller with the video id
     playerController = YoutubePlayerController(
-      initialVideoId: videoId!,
-      flags: const YoutubePlayerFlags(
-          autoPlay: false), // Do not auto-play the video
-    );
+        initialVideoId: videoId!,
+        flags: const YoutubePlayerFlags(
+            autoPlay: false) // do not auto-play the video
+        );
     super.initState();
+  }
+
+// Method to seek forward 10 seconds
+  void seekForward() {
+    final currentPosition = playerController.value.position;
+    final duration = playerController.value.metaData.duration;
+    if (currentPosition.inSeconds + 10 < duration.inSeconds) {
+      playerController.seekTo(
+        currentPosition + const Duration(seconds: 10),
+      );
+    }
+  }
+
+// Method to seek backward 10 seconds
+  void seekBackward() {
+    final currentPosition = playerController.value.position;
+    if (currentPosition.inSeconds - 10 > 0) {
+      playerController.seekTo(currentPosition - const Duration(seconds: 10));
+    }
   }
 
   @override
@@ -36,28 +53,28 @@ class _YoutubeVideoPlayerFlutterState extends State<YoutubeVideoPlayerFlutter> {
       appBar: AppBar(
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
-        title: const Text(
-            "Play YouTube Video on Flutter App"), 
+        title: const Text("Play YouTube Video on Flutter App"),
       ),
-      body: ListView(
+      body: Stack(
         children: [
-          // YouTube player widget
-          YoutubePlayer(
-            controller: playerController,
-            // Uncomment the following lines to show the video progress indicator and other controls
-            // showVideoProgressIndicator: true, // Show progress indicator
-            // bottomActions: [
-            //   CurrentPosition(), // Show the current position of the video
-            //   ProgressBar(
-            //     isExpanded: true,
-            //     colors: const ProgressBarColors(
-            //       playedColor: Colors.red, // Color of the played portion of the video
-            //       handleColor: Colors.amber, // Color of the handle on the progress bar
-            //     ),
-            //   ),
-            //   const PlaybackSpeedButton() // Button to change playback speed
-            // ],
-          )
+          YoutubePlayer(controller: playerController),
+          Positioned(
+            top: 100,right: 100,left: 100,bottom: 100,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                  onPressed: seekBackward,
+                  icon: const Icon(Icons.replay_10,size: 30,color: Colors.white54,),
+                ),
+                const SizedBox(width: 30),
+                IconButton(
+                  onPressed: seekForward,
+                  icon: const Icon(Icons.forward_10,size: 30,color: Colors.white54,),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
