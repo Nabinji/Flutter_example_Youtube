@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_example/YouTube%20Video%20Player/youtube_video_player.dart';
+import 'package:flutter_example/Responsive/responsive_navbar.dart';
+
+
 
 void main() {
   runApp(const MyApp());
@@ -11,9 +13,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return  MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: YoutubeVideoPlayerFlutter(),
+      home: ResponsiveNavbar(),
     );
   }
 }

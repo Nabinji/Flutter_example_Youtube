@@ -12,7 +12,7 @@ class YoutubeVideoPlayerFlutter extends StatefulWidget {
 
 class _YoutubeVideoPlayerFlutterState extends State<YoutubeVideoPlayerFlutter> {
   //URL of th YouTube Video
-  final videoURL = "https://youtu.be/9Frle6pMcug?si=tfYa7LBpU4nCWTaQ";
+  final videoURL = "https://youtu.be/yz2Iryuln2s?si=42oSyTnbno-xCkHO";
   // Controller to manage the Youtube video
   late YoutubePlayerController playerController;
   // Initialize the state
