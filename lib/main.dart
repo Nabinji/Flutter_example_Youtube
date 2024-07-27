@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_example/Responsive/responsive_navbar.dart';
-
-
+import 'package:flutter_example/send_email.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,9 +11,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
+    return const  MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: ResponsiveNavbar(),
+      home: SendEmailFromFlutterApp(),
     );
   }
 }
