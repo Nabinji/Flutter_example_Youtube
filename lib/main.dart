@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_example/send_email.dart';
+import 'package:flutter_example/Audio%20Player/audio_player.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -11,9 +12,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const  MaterialApp(
+    return  const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SendEmailFromFlutterApp(),
+      home: AudioPlayerWidget(),
     );
   }
 }

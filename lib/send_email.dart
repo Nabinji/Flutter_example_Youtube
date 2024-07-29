@@ -10,17 +10,16 @@ class SendEmailFromFlutterApp extends StatefulWidget {
 }
 
 class _SendEmailFromFlutterAppState extends State<SendEmailFromFlutterApp> {
-  final _key = GlobalKey<FormState>();
+  final key = GlobalKey<FormState>();
   TextEditingController email = TextEditingController();
   TextEditingController subject = TextEditingController();
 
   TextEditingController body = TextEditingController();
-
-  sendEmail(String subject, String body, String recipientemail) async {
+  sendEmail(String subject, String body, String recipient) async {
     final Email email = Email(
       body: body,
       subject: subject,
-      recipients: [recipientemail],
+      recipients: [recipient],
       isHTML: false,
     );
     await FlutterEmailSender.send(email);
@@ -30,9 +29,9 @@ class _SendEmailFromFlutterAppState extends State<SendEmailFromFlutterApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.all(15),
         child: Form(
-          key: _key,
+          key: key,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -51,7 +50,7 @@ class _SendEmailFromFlutterAppState extends State<SendEmailFromFlutterApp> {
                   border: OutlineInputBorder(),
                 ),
               ),
-                const SizedBox(height: 10),
+              const SizedBox(height: 10),
               TextField(
                 controller: body,
                 decoration: const InputDecoration(
@@ -59,17 +58,17 @@ class _SendEmailFromFlutterAppState extends State<SendEmailFromFlutterApp> {
                   border: OutlineInputBorder(),
                 ),
               ),
-                const SizedBox(height: 10),
+              const SizedBox(height: 10),
               ElevatedButton(
-                onPressed: () {
-                  _key.currentState!.save();
-                  sendEmail(subject.text, body.text, email.text);
-                  subject.clear();
-                  body.clear();
-                  email.clear();
-                },
-                child: const Text("Send Mail"),
-              ),
+                  onPressed: () {
+                    key.currentState!.save();
+                    sendEmail(subject.text, body.text, email.text);
+                    // clear the text field after send the mail
+                    subject.clear();
+                    body.clear();
+                    email.clear();
+                  },
+                  child: const Text("Send Mail"),)
             ],
           ),
         ),
@@ -77,3 +76,4 @@ class _SendEmailFromFlutterAppState extends State<SendEmailFromFlutterApp> {
     );
   }
 }
+// ok thank you that's it for today video.

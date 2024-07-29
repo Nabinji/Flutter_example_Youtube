@@ -52,6 +52,7 @@ dependencies:
   local_auth: ^2.2.0
   youtube_player_flutter: ^8.1.2
   flutter_email_sender: ^6.0.3
+  audioplayers: ^6.0.0
 
 dev_dependencies:
   flutter_test:
@@ -78,6 +79,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - image/
+    - assets/audio/
     - image/img/
     - image/ecommerce-image/
 
