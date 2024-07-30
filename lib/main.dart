@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_example/Audio%20Player/audio_player.dart';
+import 'package:flutter_example/Joke%20Generator/View/joke_page.dart';
+import 'package:provider/provider.dart';
 
+import 'Joke Generator/Provider Services/provider_services.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,9 +14,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: AudioPlayerWidget(),
+    return MultiProvider(
+        providers: [
+        ChangeNotifierProvider<JokeController>(
+          create: (_) => JokeController(),
+        ),
+      ],
+      child: const MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: JokeScreen(),
+      ),
     );
   }
 }

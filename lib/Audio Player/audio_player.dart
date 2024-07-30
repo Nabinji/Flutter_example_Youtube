@@ -1,144 +1,138 @@
-import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter/material.dart';
 
-class AudioPlayerWidget extends StatefulWidget {
-  const AudioPlayerWidget({super.key});
+class AudioPlayerApp extends StatefulWidget {
+  const AudioPlayerApp({super.key});
 
   @override
-  _AudioPlayerWidgetState createState() => _AudioPlayerWidgetState();
+  State<AudioPlayerApp> createState() => _AudioPlayerAppState();
 }
 
-class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
-  late AudioPlayer _audioPlayer;
+class _AudioPlayerAppState extends State<AudioPlayerApp> {
+  late AudioPlayer audioPlayer;
+  Duration duration = Duration.zero;
+  Duration position = Duration.zero;
   bool isPlaying = false;
-  Duration duration = Duration.zero; // Total duration of the audio
-  Duration position = Duration.zero; // Current position of the audio playback
-
   @override
   void initState() {
     super.initState();
-    _audioPlayer = AudioPlayer(); // Initializes the AudioPlayer
-
-    // Listens for duration changes and updates the state
-    _audioPlayer.onDurationChanged.listen((newDuration) {
+    audioPlayer = AudioPlayer(); // Initiaizes tha audioplayer
+    // Listens for  duration changes and updates the state
+    audioPlayer.onDurationChanged.listen((newDuration) {
       setState(() {
         duration = newDuration;
       });
     });
-
-    // Listens for position changes and updates the state
-    _audioPlayer.onPositionChanged.listen((newPosition) {
+    // Listens for  position changes and updates the state
+    audioPlayer.onPositionChanged.listen((newPosition) {
       setState(() {
         position = newPosition;
       });
     });
-
-    // Listens for when the audio finishes playing and resets the state
-    _audioPlayer.onPlayerComplete.listen((event) {
+    // Listens for  when the audio finished playing  and resets the state
+    audioPlayer.onPlayerComplete.listen((events) {
       setState(() {
         isPlaying = false;
-        position = Duration.zero;
+        duration = Duration.zero;
       });
     });
   }
 
-  @override
-  void dispose() {
-    _audioPlayer.dispose(); // Disposes the AudioPlayer to free resources
+  void despose() {
+    audioPlayer.dispose(); // Dispose tha audioPlayer to free resource
     super.dispose();
   }
 
-  // Toggles play and pause of the audio
-  void _playPause() async {
+  // Toggle play and pause of the audio
+  void playPause() async {
     if (isPlaying) {
-      await _audioPlayer.pause(); // Pauses the audio if it is playing
+      await audioPlayer.pause(); // Pause tha audio if it is playing
     } else {
-      await _audioPlayer.play(
-        // audio from network
-        UrlSource("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"),
-        // audio from ntwork
-        // AssetSource("audio/audio1.mp3"),
-      ); // Plays the audio from assets if it is paused
+      await audioPlayer.play(
+          // audio from assets
+          // AssetSource("audio/audio1.mp3"),
+          // audio from network
+          UrlSource(
+              "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"));
     }
     setState(() {
-      isPlaying = !isPlaying; // Updates the playing state
+      isPlaying = !isPlaying; // updates the playing state
     });
   }
 
-  // Formats the duration to a string with minutes and seconds
-  String _formatDuration(Duration duration) {
+// Formats the duration to a string with munutes and seconds
+  String formatDuration(Duration duration) {
     String twoDigits(int n) => n.toString().padLeft(2, '0');
     final minutes = twoDigits(duration.inMinutes.remainder(60));
     final seconds = twoDigits(duration.inSeconds.remainder(60));
-    return '$minutes:$seconds';
+    return "$minutes:$seconds";
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Audio Player'),
+        title: const Text("Audip Player"),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(15),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CircleAvatar(
-              backgroundColor: Colors.blue[300],
               radius: 180,
+              backgroundColor: Colors.blue[300],
               child: const Icon(
                 Icons.music_note,
-                color: Colors.pink,
                 size: 200,
+                color: Colors.pink,
               ),
-            ), // Displays a music note icon inside a circle avatar
-            const SizedBox(height: 20),
+            ),
+            const SizedBox(height: 30),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  _formatDuration(
-                      position), // Shows the current position of the audio
+                  formatDuration(
+                      position), // show the current position of the audion
                   style: const TextStyle(fontSize: 18),
                 ),
                 IconButton(
+                  onPressed: playPause,
                   icon: Icon(
                     isPlaying ? Icons.pause : Icons.play_arrow,
                     size: 30,
                   ),
-                  onPressed:
-                      _playPause, // Plays or pauses the audio when pressed
                 ),
                 if (duration > Duration.zero)
                   Expanded(
                     child: Slider(
                       value: position.inSeconds
                           .clamp(0, duration.inSeconds)
-                          .toDouble(), // Current position of the slider
+                          .toDouble(), // current position of the slider
                       max: duration.inSeconds
-                          .toDouble(), // Maximum value of the slider
-                      label: _formatDuration(
-                          position), // Label showing the current position
+                          .toDouble(), // maximum value of the  slider
+                      label: formatDuration(
+                          position), // label showing the current postition
                       onChanged: (value) async {
                         final newPosition = Duration(seconds: value.toInt());
-                        await _audioPlayer.seek(
-                            newPosition); // Seeks to the new position in the audio
+                        await audioPlayer.seek(
+                            newPosition); // seeks to the new position int the audio
                         setState(() {
                           position =
-                              newPosition; // Updates the current position
+                              newPosition; // updates the current position
                         });
                       },
                     ),
                   ),
                 Text(
-                  _formatDuration(
-                      duration), // Shows the total duration of the audio
+                  formatDuration(
+                      duration), // show the current position of the audion
                   style: const TextStyle(fontSize: 18),
                 ),
               ],
             ),
-            const SizedBox(height: 200),
+            const SizedBox(height: 150),
           ],
         ),
       ),
