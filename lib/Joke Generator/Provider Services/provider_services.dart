@@ -1,12 +1,13 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_example/Joke%20Generator/Model/model.dart';
 import 'package:http/http.dart' as http;
-import '../Model/joke_model.dart';
 
-class JokeController extends ChangeNotifier {
-  JokesModel? _joke;
 
-  JokesModel? get joke => _joke;
+class JokeProviderServices extends ChangeNotifier {
+  RandomJokes? _joke;
+
+  RandomJokes? get joke => _joke;
 
   Future<void> getData() async {
     var url = 'https://api.chucknorris.io/jokes/random';
@@ -16,7 +17,7 @@ class JokeController extends ChangeNotifier {
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
-        _joke = JokesModel.fromJson(data);
+        _joke = RandomJokes.fromJson(data);
 
         notifyListeners();
       } else {

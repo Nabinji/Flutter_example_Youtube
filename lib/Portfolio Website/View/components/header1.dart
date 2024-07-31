@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../Responsive/responsive.dart';
+import '../../Responsive/responsive portfolio.dart';
 
 class Header1 extends StatelessWidget {
   const Header1({super.key});

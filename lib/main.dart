@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_example/Joke%20Generator/View/joke_page.dart';
-import 'package:provider/provider.dart';
-
-import 'Joke Generator/Provider Services/provider_services.dart';
+import 'package:flutter_example/Responsive%20Contact%20Form/contact_form.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,16 +11,26 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-        providers: [
-        ChangeNotifierProvider<JokeController>(
-          create: (_) => JokeController(),
-        ),
-      ],
-      child: const MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: JokeScreen(),
-      ),
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: ResponsiveContactForm(),
     );
   }
 }
+
+
+
+// for provider only
+// Widget build(BuildContext context) {
+//   return MultiProvider(
+//     providers: [
+//       ChangeNotifierProvider<JokeProviderServices>(
+//         create: (_) => JokeProviderServices(),
+//       ),
+//     ],
+//     child: const MaterialApp(
+//       debugShowCheckedModeBanner: false,
+//       home: JokeScreen(),
+//     ),
+//   );
+// }

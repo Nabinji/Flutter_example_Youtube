@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../Responsive/responsive.dart';
+import '../../Responsive/responsive portfolio.dart';
 import 'social_icon.dart';
 
 class SocialIconsBar extends StatelessWidget {

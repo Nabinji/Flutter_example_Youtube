@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../models/project_model.dart';
-import '../../Responsive/responsive.dart';
+import '../../Responsive/responsive portfolio.dart';
 
 class ProjectCard extends StatelessWidget {
   final ProjectModel project;

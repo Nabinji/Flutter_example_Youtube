@@ -1,16 +1,24 @@
 // To parse this JSON data, do
 //
-//     final jokesModel = jokesModelFromJson(jsonString);
+//     final randomJokes = randomJokesFromJson(jsonString);
 
 import 'dart:convert';
 
-JokesModel jokesModelFromJson(String str) =>
-    JokesModel.fromJson(json.decode(str));
+RandomJokes randomJokesFromJson(String str) =>
+    RandomJokes.fromJson(json.decode(str));
 
-String jokesModelToJson(JokesModel data) => json.encode(data.toJson());
+String randomJokesToJson(RandomJokes data) => json.encode(data.toJson());
 
-class JokesModel {
-  JokesModel({
+class RandomJokes {
+  List<dynamic> categories;
+  DateTime createdAt;
+  String iconUrl;
+  String id;
+  DateTime updatedAt;
+  String url;
+  String value;
+
+  RandomJokes({
     required this.categories,
     required this.createdAt,
     required this.iconUrl,
@@ -20,15 +28,7 @@ class JokesModel {
     required this.value,
   });
 
-  List<dynamic> categories;
-  DateTime createdAt;
-  String iconUrl;
-  String id;
-  DateTime updatedAt;
-  String url;
-  String value;
-
-  factory JokesModel.fromJson(Map<String, dynamic> json) => JokesModel(
+  factory RandomJokes.fromJson(Map<String, dynamic> json) => RandomJokes(
         categories: List<dynamic>.from(json["categories"].map((x) => x)),
         createdAt: DateTime.parse(json["created_at"]),
         iconUrl: json["icon_url"],

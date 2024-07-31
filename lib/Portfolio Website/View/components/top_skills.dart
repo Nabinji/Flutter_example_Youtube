@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../Responsive/responsive.dart';
+import '../../Responsive/responsive portfolio.dart';
 import 'skill_card.dart';
 
 class TopSkills extends StatelessWidget {

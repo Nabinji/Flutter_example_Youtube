@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_example/Joke%20Generator/Provider%20Services/provider_services.dart';
 import 'package:provider/provider.dart';
-import '../Provider Services/provider_services.dart';
 
 class JokeScreen extends StatelessWidget {
   const JokeScreen({super.key});
@@ -9,15 +9,18 @@ class JokeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Random Joke Generator'),
         backgroundColor: Colors.blue,
+        foregroundColor: Colors.white,
+        title: const Text("Random Joke Gnerator"),
       ),
-      body: Consumer<JokeController>(
+      body: Consumer<JokeProviderServices>(
         builder: (context, jokeController, _) {
           return Center(
             child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 50.0, horizontal: 16.0),
+              padding: const EdgeInsets.symmetric(
+                vertical: 50,
+                horizontal: 15,
+              ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -27,16 +30,16 @@ class JokeScreen extends StatelessWidget {
                       height: 100,
                       width: 100,
                     ),
-                  
                     const SizedBox(height: 20),
                     Text(
                       jokeController.joke!.value,
                       style: const TextStyle(
                         fontSize: 22,
                         color: Colors.black,
-                        letterSpacing: 1,
+                        letterSpacing: 1
                       ),
                     ),
+                     
                   ],
                   const SizedBox(height: 20),
                   ElevatedButton(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../Responsive/responsive.dart';
+import '../../Responsive/responsive portfolio.dart';
 
 class SkillCard extends StatelessWidget {
   final String url;

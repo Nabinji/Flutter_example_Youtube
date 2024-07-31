@@ -9,7 +9,7 @@ import 'components/my_drawer.dart';
 import 'components/recent_projects.dart';
 import 'components/social_icons_bar.dart';
 import 'components/top_skills.dart';
-import '../Responsive/responsive.dart';
+import '../Responsive/responsive portfolio.dart';
 
 
 class DeveloperPortFolio extends StatelessWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_example/Portfolio%20Website/Utils/colors.dart';
-import '../../Responsive/responsive.dart';
+import '../../Responsive/responsive portfolio.dart';
 
 class ContactForm extends StatelessWidget {
   const ContactForm({super.key});
