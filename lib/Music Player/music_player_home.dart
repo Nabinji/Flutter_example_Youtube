@@ -79,7 +79,7 @@ class _PlayerPageState extends State<MusicPlayerUI> {
                 style: TextStyle(
                   overflow: TextOverflow.ellipsis,
                   fontSize: 24,
-                  color: textColor,
+                  color: myTextColor,
                 ),
               ),
             ),
@@ -88,7 +88,7 @@ class _PlayerPageState extends State<MusicPlayerUI> {
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: textColor,
+                color: myTextColor,
               ),
             ),
             // for music level
@@ -148,14 +148,14 @@ class _PlayerPageState extends State<MusicPlayerUI> {
                     "1.02",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: textColor,
+                      color: myTextColor,
                       fontSize: 20,
                     ),
                   ),
                    Text(
                     "3.22",
                     style: TextStyle(
-                      color: textColor,
+                      color: myTextColor,
                       fontSize: 20,
                     ),
                   )

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'responsive.dart';
+import 'package:flutter_example/Responsive%20Contact%20Form/responsive.dart';
 
 class ResponsiveContactForm extends StatelessWidget {
   const ResponsiveContactForm({super.key});
@@ -11,35 +11,36 @@ class ResponsiveContactForm extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
-        title: const Text("Contach Form"),
+        title: const Text("Contact Form"),
       ),
       body: SafeArea(
+        bottom: false,
         child: Center(
           child: SingleChildScrollView(
             child: Column(
               children: [
+                const SizedBox(height: 5),
                 const Text(
-                  'Get In Touch With Us',
+                  "Get In Touch With Us",
                   style: TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.w800,
                   ),
                 ),
-                const SizedBox(height: 15),
+                const SizedBox(height: 10),
                 SizedBox(
-                  width: Responsiv.isMobile(context)
-                      // if the device is mobile then it takes the 90% of its total width of screen
-                      ? Responsiv.widthOfScreen(context) * 0.9
-                      // otherwiser it thakes the 80% of the total width of screen
-                      : Responsiv.widthOfScreen(context) * 0.8,
+                  width: Responsive.isMobile(context)
+                      // if the device is mobile then it takes the 90% of it's total width of screen
+                      ? Responsive.widthOfScreen(context) * 0.9
+                      // otherwise it takes the 80% of the total width of screen
+                      : Responsive.widthOfScreen(context) * 0.7,
                   child: DecoratedBox(
                     decoration: BoxDecoration(
                       boxShadow: const [
                         BoxShadow(
-                          color: Color(0xFFC4ACA1),
-                          blurRadius: 4,
-                          spreadRadius: 2,
-                        )
+                            color: Color(0XFFC4ACA1),
+                            blurRadius: 4,
+                            spreadRadius: 2),
                       ],
                       borderRadius: BorderRadius.circular(10),
                       color: Colors.white,
@@ -47,13 +48,12 @@ class ResponsiveContactForm extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(20),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          contackFormField("Name*", 1, "Your Name"),
-                          contackFormField('Email*', 1, 'Your Email'),
-                          contackFormField(
-                              'Phone Number', 1, 'Your phone number'),
-                          contackFormField('Message*', 10, 'Your Message'),
+                          contactFormField("Name*", 1, "Your Name"),
+                          contactFormField("Email*", 1, "Your Email"),
+                          contactFormField(
+                              "Phone Number", 1, "Your Phone Number"),
+                          contactFormField("Message*", 10, "Your Message"),
                           Row(
                             children: [
                               Expanded(
@@ -61,25 +61,23 @@ class ResponsiveContactForm extends StatelessWidget {
                                   style: OutlinedButton.styleFrom(
                                       backgroundColor: Colors.blue),
                                   onPressed: () {},
-                                  child: const Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Text(
-                                      'Submit',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold),
+                                  child: const Text(
+                                    "Submit",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                 ),
                               ),
                             ],
-                          ),
+                          )
                         ],
                       ),
                     ),
                   ),
-                ),
+                )
               ],
             ),
           ),
@@ -88,7 +86,7 @@ class ResponsiveContactForm extends StatelessWidget {
     );
   }
 
-  Padding contackFormField(name, maxLines, hintText) {
+  contactFormField(name, maxLine, hintText) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: Column(
@@ -97,20 +95,20 @@ class ResponsiveContactForm extends StatelessWidget {
           Text(
             name,
             style: const TextStyle(
-              color: Color(0xFF4756DF),
               fontSize: 18,
-              fontWeight: FontWeight.w600,
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
             ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8),
             child: TextField(
-              maxLines: maxLines,
+              maxLines: maxLine,
               decoration: InputDecoration(
                 hintText: hintText,
                 border: const OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: Color(0xFF4756DF),
+                    color: Colors.blue,
                   ),
                 ),
                 contentPadding: const EdgeInsets.symmetric(

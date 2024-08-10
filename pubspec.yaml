@@ -53,6 +53,8 @@ dependencies:
   youtube_player_flutter: ^8.1.2
   flutter_email_sender: ^6.0.3
   audioplayers: ^6.0.0
+  url_launcher: ^6.3.0
+  staggered_grid_view_flutter: ^0.0.4
 
 dev_dependencies:
   flutter_test:
@@ -82,6 +84,8 @@ flutter:
     - assets/audio/
     - image/img/
     - image/ecommerce-image/
+    - image/portfolio-image/
+    - image/plant-image/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
