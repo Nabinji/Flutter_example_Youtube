@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_example/Universe%20UI/Model/universe_model.dart';
-import 'package:flutter_example/Universe%20UI/Utils/colors.dart';
+
+import '../Model/universe_model.dart';
+import '../Utils/colors.dart';
 
 class PlanetDetailPage extends StatefulWidget {
   final PlanetInfo planetInfo;

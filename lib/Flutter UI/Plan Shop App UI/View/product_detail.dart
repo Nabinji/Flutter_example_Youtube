@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_example/Plan%20Shop%20App%20UI/Model/plant_model.dart';
+import 'package:flutter_example/Flutter%20UI/Plan%20Shop%20App%20UI/Model/plant_model.dart';
 
 class DetailScreen extends StatelessWidget {
   final Product product;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_example/Ecommerce%20App%20UI/Model/product_model.dart';
-import 'package:flutter_example/Ecommerce%20App%20UI/Utils/colors.dart';
-import 'package:flutter_example/Ecommerce%20App%20UI/Utils/size.dart';
+import 'package:flutter_example/Flutter%20UI/Ecommerce%20App%20UI/Model/product_model.dart';
+import 'package:flutter_example/Flutter%20UI/Ecommerce%20App%20UI/Utils/colors.dart';
+import 'package:flutter_example/Flutter%20UI/Ecommerce%20App%20UI/Utils/size.dart';
 
 class ProductDetail extends StatelessWidget {
   final Product product;

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_example/Animation/animation_404.dart';
+import 'package:flutter_example/Flutter%20UI/Burger%20App%20UI/splash_screen.dart';
+import 'package:flutter_example/Flutter%20UI/Plan%20Shop%20App%20UI/View/bottom_nav_bar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Flutter404Animation(),
+      home: SplashScreen(),
     );
   }
 }

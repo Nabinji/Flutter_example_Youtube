@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_example/Ecommerce%20App%20UI/Screen/detail_screen.dart';
-import 'package:flutter_example/Plan%20Shop%20App%20UI/Model/plant_model.dart';
-import 'package:flutter_example/Plan%20Shop%20App%20UI/View/product_detail.dart';
+import 'package:flutter_example/Flutter%20UI/Plan%20Shop%20App%20UI/Model/plant_model.dart';
+import 'package:flutter_example/Flutter%20UI/Plan%20Shop%20App%20UI/View/product_detail.dart';
 import 'package:staggered_grid_view_flutter/widgets/staggered_grid_view.dart';
 import 'package:staggered_grid_view_flutter/widgets/staggered_tile.dart';
 
@@ -160,7 +159,7 @@ class _PlantShopHomeScreenState extends State<PlantShopHomeScreen> {
                                     ),
                                   ),
                                 ),
-                              )
+                              ),
                             ],
                           ),
                           // for product name

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_example/Universe%20UI/Model/universe_model.dart';
-import 'package:flutter_example/Universe%20UI/Screen/planet_detail_page.dart';
 import 'package:flutter_swiper_view/flutter_swiper_view.dart';
-import 'package:flutter_example/Universe%20UI/Utils/colors.dart';
+
+
+import '../Model/universe_model.dart';
+import '../Utils/colors.dart';
+import 'planet_detail_page.dart';
 
 class UniversHomePage extends StatefulWidget {
   const UniversHomePage({super.key});

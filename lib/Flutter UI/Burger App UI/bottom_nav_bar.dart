@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_example/Plan%20Shop%20App%20UI/View/plant_shop_home_screen.dart';
+import 'burger_home_screen.dart';
 
-class BottomNavBar extends StatefulWidget {
-  const BottomNavBar({super.key});
+class MyBottomNavBar extends StatefulWidget {
+  const MyBottomNavBar({super.key});
   @override
-  State<BottomNavBar> createState() => _BottomNavBarState();
+  State<MyBottomNavBar> createState() => _MyBottomNavBarState();
 }
 
-class _BottomNavBarState extends State<BottomNavBar> {
+class _MyBottomNavBarState extends State<MyBottomNavBar> {
   int selectedIndex = 0;
   late final List<Widget> page;
   @override
   void initState() {
     page = [
-      const PlantShopHomeScreen(),
-      navBarPage(Icons.favorite),
-      navBarPage(Icons.notifications),
-      navBarPage(Icons.person),
+      const BurgerHomeScreen(),
+      navBarPage(Icons.shopping_cart_outlined),
+      navBarPage(Icons.favorite_border),
+      navBarPage(Icons.note_add_outlined),
     ];
     super.initState();
   }
@@ -26,13 +26,12 @@ class _BottomNavBarState extends State<BottomNavBar> {
     return Scaffold(
       backgroundColor: Colors.white,
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.white,
-        elevation: 5,
-        
+          backgroundColor: Colors.white,
+          elevation: 5,
           iconSize: 32,
           currentIndex: selectedIndex,
-          selectedItemColor: Colors.green,
-          unselectedItemColor: Colors.black45,
+          selectedItemColor: Colors.black,
+          unselectedItemColor: Colors.black38,
           type: BottomNavigationBarType.fixed,
           showSelectedLabels: false,
           showUnselectedLabels: false,
@@ -43,9 +42,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
           },
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
-            BottomNavigationBarItem(icon: Icon(Icons.favorite), label: ""),
-            BottomNavigationBarItem(icon: Icon(Icons.notifications), label: ""),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: ""),
+            BottomNavigationBarItem(icon: Icon(Icons.shopping_cart_outlined), label: ""),
+            BottomNavigationBarItem(icon: Icon(Icons.favorite_border), label: ""),
+            BottomNavigationBarItem(icon: Icon(Icons.note_add_outlined), label: ""),
           ]),
       body: page[selectedIndex],
     );

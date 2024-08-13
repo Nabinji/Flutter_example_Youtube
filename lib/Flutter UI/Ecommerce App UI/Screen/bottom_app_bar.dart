@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_example/Ecommerce%20App%20UI/Screen/ecommerce_home_page.dart';
-import 'package:flutter_example/Ecommerce%20App%20UI/Utils/colors.dart';
+import 'package:flutter_example/Flutter%20UI/Ecommerce%20App%20UI/Screen/ecommerce_home_page.dart';
+import 'package:flutter_example/Flutter%20UI/Ecommerce%20App%20UI/Utils/colors.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 class MyBottomNavBar extends StatefulWidget {
