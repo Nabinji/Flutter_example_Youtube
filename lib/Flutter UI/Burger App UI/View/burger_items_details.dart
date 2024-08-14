@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_example/Flutter%20UI/Burger%20App%20UI/Model/burget_model.dart';
 
-class DetailPage extends StatefulWidget {
+class BurgerItemsDetails extends StatefulWidget {
   final Burger burger;
-  const DetailPage({super.key, required this.burger});
+  const BurgerItemsDetails({
+    super.key,
+    required this.burger,
+  });
 
   @override
-  _DetailPageState createState() => _DetailPageState();
+  State<BurgerItemsDetails> createState() => _BurgerItemsDetailsState();
 }
 
-class _DetailPageState extends State<DetailPage> {
+class _BurgerItemsDetailsState extends State<BurgerItemsDetails> {
   int total = 1;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,9 +21,10 @@ class _DetailPageState extends State<DetailPage> {
       body: SafeArea(
         bottom: false,
         child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 15,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -49,14 +52,17 @@ class _DetailPageState extends State<DetailPage> {
                       icon: const Icon(
                         Icons.favorite_border,
                       ),
-                    )
+                    ),
                   ],
                 ),
                 // for image
                 Center(
-                  child: Image.network(
-                    widget.burger.image,
-                    height: 350,
+                  child: Hero(
+                    tag: widget.burger.image,
+                    child: Image.network(
+                      widget.burger.image,
+                      height: 350,
+                    ),
                   ),
                 ),
                 // for rating
@@ -75,7 +81,6 @@ class _DetailPageState extends State<DetailPage> {
                         color: Colors.orange,
                         size: 20,
                       ),
-                      const SizedBox(width: 3),
                       Text(
                         widget.burger.rating.toString(),
                         style: const TextStyle(
@@ -91,14 +96,13 @@ class _DetailPageState extends State<DetailPage> {
                   children: [
                     // for items name
                     SizedBox(
-                      width: 200,
+                      width: 220,
                       child: Text(
                         widget.burger.name,
                         style: const TextStyle(
                           height: 1.2,
                           fontSize: 30,
                           fontWeight: FontWeight.w700,
-                          wordSpacing: 2,
                         ),
                       ),
                     ),
@@ -115,21 +119,22 @@ class _DetailPageState extends State<DetailPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           InkWell(
-                              onTap: () {
-                                if (total < 1) {
-                                  setState(() {
-                                    total = 1;
-                                  });
-                                } else if (total > 1) {
-                                  setState(() {
-                                    total -= 1;
-                                  });
-                                }
-                              },
-                              child: const Text(
-                                "-",
-                                style: TextStyle(fontSize: 30),
-                              )),
+                            onTap: () {
+                              if (total < 1) {
+                                setState(() {
+                                  total = 1;
+                                });
+                              } else if (total > 1) {
+                                setState(() {
+                                  total -= 1;
+                                });
+                              }
+                            },
+                            child: const Text(
+                              "-",
+                              style: TextStyle(fontSize: 30),
+                            ),
+                          ),
                           Text(
                             "$total",
                             style: const TextStyle(fontSize: 20),
@@ -137,21 +142,21 @@ class _DetailPageState extends State<DetailPage> {
                           InkWell(
                             onTap: () {
                               setState(() {
-                                total += 1;
+                                 total += 1;
                               });
                             },
                             child: const Text(
                               "+",
-                              style: TextStyle(fontSize: 20),
+                              style: TextStyle(fontSize: 25),
                             ),
-                          )
+                          ),
                         ],
                       ),
-                    )
+                    ),
                   ],
                 ),
                 const SizedBox(height: 15),
-                // of required ingredients
+                // for required ingredients
                 const Text(
                   "Ingredients",
                   style: TextStyle(
@@ -173,13 +178,13 @@ class _DetailPageState extends State<DetailPage> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 10),
                 // for description
                 const Text(
                   "Description",
                   style: TextStyle(
-                    fontWeight: FontWeight.w600,
                     fontSize: 18,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
                 const SizedBox(height: 10),
@@ -189,24 +194,19 @@ class _DetailPageState extends State<DetailPage> {
                     fontSize: 17,
                     color: Colors.black54,
                   ),
-                ),
+                )
               ],
             ),
           ),
         ),
       ),
-
       // for price and add to cart button
       floatingActionButton: FloatingActionButton.extended(
-        elevation: 0,
         backgroundColor: Colors.white,
         onPressed: () {},
         label: Row(
           children: [
-            const Text(
-              "\$",
-              style: TextStyle(color: Colors.black),
-            ),
+            const Text("\$"),
             Text(
               "${widget.burger.price}",
               style: const TextStyle(
@@ -221,15 +221,17 @@ class _DetailPageState extends State<DetailPage> {
               height: 60,
               decoration: BoxDecoration(
                 color: Colors.black,
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(30),
               ),
               child: const Center(
                 child: Text(
                   "Add to cart",
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
@@ -242,31 +244,28 @@ class _DetailPageState extends State<DetailPage> {
       child: Container(
         padding: const EdgeInsets.all(5),
         width: 80,
-        height: 80,
+        height: 90,
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.shade100,
-              offset: const Offset(0, 4),
-              blurRadius: 5,
-            )
-          ],
-        ),
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.shade200,
+                offset: const Offset(0, 4),
+                blurRadius: 5,
+              )
+            ]),
         child: Column(
           children: [
-            const SizedBox(height: 10),
             Text(
               icon,
-              style: const TextStyle(fontSize: 24),
+              style: const TextStyle(fontSize: 40),
             ),
-            const SizedBox(height: 5),
             Text(
               name,
               style: const TextStyle(
                 fontWeight: FontWeight.w500,
-                fontSize: 14,
+                fontSize: 15,
               ),
             )
           ],
