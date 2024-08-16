@@ -55,6 +55,7 @@ dependencies:
   audioplayers: ^6.0.0
   url_launcher: ^6.3.0
   staggered_grid_view_flutter: ^0.0.4
+  fl_chart: ^0.68.0
 
 dev_dependencies:
   flutter_test:
