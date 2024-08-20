@@ -14,177 +14,164 @@ class MyChart extends StatelessWidget {
         child: Container(
           color: Colors.blueGrey[900],
           height: 500,
-          child: const MyLineChart(),
+          child: const MyAnimatedChart(),
         ),
       ),
     );
   }
 }
 
-class MyLineChart extends StatefulWidget {
-  const MyLineChart({super.key});
-
+class MyAnimatedChart extends StatefulWidget {
+  const MyAnimatedChart({super.key});
   // Colors for the sine and cosine lines.
   final Color sinColor = Colors.green;
   final Color cosColor = Colors.red;
 
   @override
-  State<MyLineChart> createState() => _MyLineChartState();
+  State<MyAnimatedChart> createState() => _MyAnimatedChartState();
 }
 
-class _MyLineChartState extends State<MyLineChart> {
-  // Limits the number of points shown in the chart to avoid overflow.
+class _MyAnimatedChartState extends State<MyAnimatedChart> {
+  // Limits the number of points show in the chart to avoid overflow.
   final limitCount = 100;
-
-  // Lists to store the points for the sine and cosine functions.
-  final sinPoints = <FlSpot>[];
+  // Lists to store  the points for the sine and cosine functions.
+  final sinPoint = <FlSpot>[];
   final cosPoints = <FlSpot>[];
 
-  double X = 0; // Tracks the current X value.
-  double step = .05; // Increment step for the X value.
-
-  late Timer timer; // Timer to periodically update the chart data.
-
+  double X = 0; // TO TRACKS THE CURRENT x value.
+  double step = .05; // increment step for the X value.
+  late Timer timer; // timer to peridically update the chart data.
   @override
   void initState() {
-    super.initState();
-    // Timer updates the data every 50 milliseconds.
+// timer updates the data every 50  milliseconds.
     timer = Timer.periodic(const Duration(milliseconds: 50), (timer) {
-      // If the number of points exceeds the limit, remove the oldest points.
-      while (sinPoints.length > limitCount) {
-        sinPoints.removeAt(0);
+      // if the number of point sxceeds the limit, remove the oldest points.
+      while (sinPoint.length > limitCount) {
+        sinPoint.removeAt(0);
         cosPoints.removeAt(0);
       }
-
       setState(() {
-        // Calculate new Y values based on the sine and cosine functions and add new points.
-        sinPoints.add(
+        // to calculate new Y values  based on the sine and cosine functions and add anw points.
+        sinPoint.add(
           FlSpot(
-            X, // Current X value.
+            X, // current X value.
             .5 * math.sin(20 * X) +
-                .5 * math.sin(5 * X), // Y value for sine function.
+                .5 * math.sin(5 * X), // Y value for sine function/
           ),
         );
         cosPoints.add(
-          FlSpot(X, math.cos(X)),
-        ); // Y value for cosine function.
+          FlSpot(
+            X,
+            math.cos(X), // Y value fpr cosine function.
+          ),
+        );
+        X += step; // increment X for the next cycle
       });
-      X += step; // Increment X for the next cycle.
     });
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    // Only render the chart if there are cosine points available.
+    // only render the chart if there are cosine points available.
     return cosPoints.isNotEmpty
         ? Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const SizedBox(height: 15),
-              // Display the current X value.
+              // display the current x value.
               Text(
-                'X:${X.toStringAsFixed(1)}',
+                "X:${X.toStringAsFixed(1)}",
                 style: const TextStyle(
+                  fontSize: 20,
                   color: Colors.white,
-                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              // Display the latest Y value for the sine function.
+              // display the latest y value for the sine function
               Text(
-                '.5Sin(20X) + .5sin(5*x):${sinPoints.last.y.toStringAsFixed(1)}',
+                ".5sin(20x)+ .5sin5x:${sinPoint.last.y.toStringAsFixed(1)}",
                 style: const TextStyle(
+                  fontSize: 20,
                   color: Colors.white70,
-                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              // Display the latest Y value for the cosine function.
+              // display the latest y value for the cosine function
               Text(
-                'cos(X):${cosPoints.last.y.toStringAsFixed(1)}',
+                "cos(X)${cosPoints.last.y.toStringAsFixed(1)}",
                 style: const TextStyle(
-                  color: Colors.white60,
                   fontSize: 20,
+                  color: Colors.white60,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 20),
-              // AspectRatio widget to maintain the desired ratio for the chart.
+              // aspectRatio widget to maintain the desired ratio for the chart.
               AspectRatio(
                 aspectRatio: 1.5,
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 25),
-                  // LineChart widget to plot the data points.
-                  child: LineChart(
-                    LineChartData(
-                      minY: -1,
-                      maxY: 1,
-                      minX: sinPoints.first
-                          .x, // X-axis range starts from the first point's X value.
-                      maxX: sinPoints.last
-                          .x, // X-axis range ends at the last point's X value.
-                      lineTouchData: const LineTouchData(enabled: false),
-                      clipData: const FlClipData
-                          .all(), // Clips overflowing content on all sides.
-                      gridData: const FlGridData(
-                          show: true), // Shows grid lines on the chart.
-                      borderData:
-                          FlBorderData(show: false), // Hides the chart border.
-                      lineBarsData: [
-                        sinLine(
-                            sinPoints), // Configures the sine line appearance.
-                        cosLine(
-                            cosPoints), // Configures the cosine line appearance.
-                      ],
-                      titlesData:
-                          const FlTitlesData(show: false), // Hides axis titles.
-                    ),
-                  ),
+                  child: LineChart(LineChartData(
+                    minY: -1,
+                    maxY: 1,
+                    minX: sinPoint.first
+                        .x, // X-axis range starts from the first point's X value.
+                    maxX: sinPoint
+                        .last.x, // X-axis range ends from last point's X value.
+                    lineTouchData: const LineTouchData(enabled: false),
+                    clipData: const FlClipData
+                        .all(), // clips overflowing content on all sides.
+                    gridData: const FlGridData(
+                        show: true), // show grid lines on the chart.
+                    borderData:
+                        FlBorderData(show: false), // hides the chart border.
+                    lineBarsData: [
+                      sinLine(sinPoint), // configures the sine line appearance.
+                      cosLine(
+                          cosPoints) // configures the cosine line appearance.
+                    ],
+                    titlesData:
+                        const FlTitlesData(show: false), // hides axis titles.
+                  )),
                 ),
               )
             ],
           )
-        : Container(); // Empty container if no points are available.
+        : Container(); // empty container if no points are available.
   }
 
-  // Method to configure the sine line's appearance.
+  // method to configure the sine lines appearance.
   LineChartBarData sinLine(List<FlSpot> points) {
     return LineChartBarData(
-      spots: points, // Data points for the sine line.
-      dotData: const FlDotData(show: false), // Hides dots at data points.
-      gradient: LinearGradient(
-        colors: [
-          widget.sinColor.withOpacity(0),
-          widget.sinColor
-        ], // Gradient for the line.
-        stops: const [.1, 1], // Controls where the gradient starts and ends.
-      ),
-      barWidth: 3, // Thickness of the line.
-      isCurved: false, // Straight line segments (not curved).
+      spots: points, // data points for the sine line.
+      dotData: const FlDotData(show: false), // hides dots at data points.
+      gradient: LinearGradient(colors: [
+        widget.sinColor.withOpacity(0),
+        widget.sinColor,
+      ], stops: const [
+        .1,
+        1
+      ] // gradient for the lines.
+          ),
+      barWidth: 3, // thikness of the line.
+      isCurved: false, // straight line segments (not curved).
     );
   }
 
-  // Method to configure the cosine line's appearance.
+  // method to configure the cosine lines appearance.
   LineChartBarData cosLine(List<FlSpot> points) {
     return LineChartBarData(
-      spots: points, // Data points for the cosine line.
-      dotData: const FlDotData(show: false), // Hides dots at data points.
+      spots: points, // data points for the sine line.
+      dotData: const FlDotData(show: false), // hides dots at data points.
       gradient: LinearGradient(
         colors: [
           widget.cosColor.withOpacity(0),
-          widget.cosColor
-        ], // Gradient for the line.
-        stops: const [.1, 1], // Controls where the gradient starts and ends.
+          widget.cosColor,
+        ], // gradient for the lines.
+        stops: const [.1, 1],
       ),
-      barWidth: 5, // Thickness of the line.
-      isCurved: false, // Straight line segments (not curved).
+      barWidth: 3, // thikness of the line.
+      isCurved: false, // straight line segments (not curved).
     );
-  }
-
-  @override
-  void dispose() {
-    timer
-        .cancel(); // Cancel the timer to stop updating the chart when the widget is disposed.
-    super.dispose();
   }
 }

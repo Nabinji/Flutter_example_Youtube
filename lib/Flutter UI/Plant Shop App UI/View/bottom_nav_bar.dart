@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_example/Flutter%20UI/Plan%20Shop%20App%20UI/View/plant_shop_home_screen.dart';
+import 'package:flutter_example/Flutter%20UI/Plant%20Shop%20App%20UI/View/plant_shop_home_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});

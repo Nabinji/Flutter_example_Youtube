@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_example/my_chart.dart';
+import 'Flutter UI/Space App UI/View/space_splash_screen.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MyChart(),
+      home: SpaceSclashScreen(),
     );
   }
 }
