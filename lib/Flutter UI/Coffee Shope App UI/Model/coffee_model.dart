@@ -72,7 +72,3 @@ List<Coffee> coffeelist = [
     star: 4.5
   ),
 ];
-
-// List<Coffee> get coffeelist {
-//   return [..._coffee_list];
-// }

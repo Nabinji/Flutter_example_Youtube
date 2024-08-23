@@ -1,20 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_example/Flutter%20UI/Coffee%20Shope%20App%20UI/Model/coffee_model.dart';
 import 'package:smooth_star_rating_null_safety/smooth_star_rating_null_safety.dart';
-import '../Model/coffee_model.dart';
 
-class CoffeeDetails extends StatefulWidget {
+class CoffeeDetailScreen extends StatefulWidget {
   final Coffee coffee;
-  const CoffeeDetails({super.key, required this.coffee});
+  const CoffeeDetailScreen({super.key, required this.coffee});
 
   @override
-  _CoffeeDetailsState createState() => _CoffeeDetailsState();
+  State<CoffeeDetailScreen> createState() => _CoffeeDetailScreenState();
 }
 
-class _CoffeeDetailsState extends State<CoffeeDetails> {
+class _CoffeeDetailScreenState extends State<CoffeeDetailScreen> {
+  bool isFavorite = true;
+  bool switchValue = false;
   int quantity = 1;
-  bool switchvalue = true;
-  bool isFavourite = true;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -26,25 +26,20 @@ class _CoffeeDetailsState extends State<CoffeeDetails> {
           children: [
             // for menu and cart icon
             Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20,
-                // vertical: 10,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(
+                  Image.asset(
+                    "image/coffee-shop-image/menu.png",
                     height: 40,
                     width: 40,
-                    child: Image.asset(
-                      "image/coffee-shop-image/menu.png",
-                    ),
                   ),
                   const Icon(
                     Icons.shopping_cart_rounded,
                     color: Colors.white,
                     size: 35,
-                  )
+                  ),
                 ],
               ),
             ),
@@ -55,7 +50,7 @@ class _CoffeeDetailsState extends State<CoffeeDetails> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Container(
-                        height: MediaQuery.of(context).size.height * 0.7,
+                        height: size.height * 0.62,
                         decoration: const BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.only(
@@ -70,14 +65,12 @@ class _CoffeeDetailsState extends State<CoffeeDetails> {
                   Positioned(
                     left: 50,
                     top: 50,
-                    child: SizedBox(
-                      height: 300,
-                      width: 300,
-                      child: Hero(
-                        tag: widget.coffee.image,
-                        child: Image.asset(
-                          widget.coffee.image,
-                        ),
+                    child: Hero(
+                      tag: widget.coffee.image,
+                      child: Image.asset(
+                        widget.coffee.image,
+                        height: 300,
+                        width: 300,
                       ),
                     ),
                   ),
@@ -86,7 +79,7 @@ class _CoffeeDetailsState extends State<CoffeeDetails> {
                     children: [
                       Container(
                         padding: const EdgeInsets.all(30),
-                        height: MediaQuery.of(context).size.height * 0.6,
+                        height: size.height * 0.6,
                         child: Column(
                           children: [
                             // for back and favorite button
@@ -94,37 +87,39 @@ class _CoffeeDetailsState extends State<CoffeeDetails> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 IconButton(
-                                  onPressed: () => Navigator.of(context).pop(),
-                                  iconSize: 40,
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
                                   icon: Icon(
                                     Icons.arrow_back_ios,
+                                    size: 40,
                                     color: widget.coffee.color,
                                   ),
                                 ),
                                 IconButton(
                                   onPressed: () {
                                     setState(() {
-                                      isFavourite = !isFavourite;
+                                      isFavorite = !isFavorite;
                                     });
                                   },
-                                  iconSize: 40,
                                   icon: Icon(
-                                    isFavourite
+                                    isFavorite
                                         ? Icons.favorite
                                         : Icons.favorite_border,
                                     color: widget.coffee.color,
+                                    size: 40,
                                   ),
                                 ),
                               ],
                             ),
+                            // for name
                             const SizedBox(height: 30),
-                            // for items name
                             Text(
                               widget.coffee.name,
                               style: const TextStyle(
-                                height: 0.7,
-                                fontWeight: FontWeight.w700,
+                                height: 0.8,
                                 fontSize: 45,
+                                fontWeight: FontWeight.w700,
                               ),
                             ),
                             // for rating
@@ -138,43 +133,39 @@ class _CoffeeDetailsState extends State<CoffeeDetails> {
                                   halfFilledIconData: Icons.star_half,
                                   defaultIconData: Icons.star_border,
                                   starCount: 5,
+                                  color: Colors.amber,
+                                  
                                   allowHalfRating: true,
-                                  spacing: 2.0,
-                                  onRatingChanged: (value) {
+                                  spacing: 2,
+                                  onRatingChanged: (rating) {
                                     setState(() {
-                                      widget.coffee.star = value;
+                                      widget.coffee.star = rating;
                                     });
                                   },
                                 ),
-                                Container(
-                                  padding: const EdgeInsets.only(top: 10),
-                                  child: Text(
-                                    widget.coffee.star.toString(),
-                                    style: const TextStyle(
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.w500,
-                                    ),
+                                Text(
+                                  widget.coffee.star.toString(),
+                                  style: const TextStyle(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.w500,
                                   ),
-                                ),
+                                )
                               ],
                             ),
                             SizedBox(height: size.height * 0.06),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                SizedBox(
-                                  // for price
-                                  height: 45,
-                                  child: Text(
-                                    "\$${widget.coffee.price}",
-                                    style: const TextStyle(
+                                // for price
+                                Text(
+                                  "\$${widget.coffee.price}",
+                                  style: const TextStyle(
                                       fontWeight: FontWeight.w700,
-                                      fontSize: 35,
-                                    ),
-                                  ),
+                                      fontSize: 35),
                                 ),
-                                // no of quantity
+
+                                // for no fo quantity
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
@@ -204,11 +195,12 @@ class _CoffeeDetailsState extends State<CoffeeDetails> {
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
-                                          horizontal: 20),
+                                        horizontal: 20,
+                                      ),
                                       child: Text(
                                         quantity.toString(),
                                         style: const TextStyle(
-                                          fontSize: 25,
+                                          fontSize: 20,
                                           fontWeight: FontWeight.w500,
                                         ),
                                       ),
@@ -247,29 +239,27 @@ class _CoffeeDetailsState extends State<CoffeeDetails> {
                                 const Text(
                                   "L",
                                   style: TextStyle(
-                                    fontWeight: FontWeight.w700,
                                     fontSize: 30,
+                                    fontWeight: FontWeight.w700,
                                   ),
                                 ),
                                 const SizedBox(width: 10),
                                 CupertinoSwitch(
-                                  trackColor: widget.coffee.color,
-                                  value: switchvalue,
-                                  activeColor: widget.coffee.color,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      switchvalue = value;
-                                    });
-                                  },
-                                ),
+                                    value: switchValue,
+                                    activeColor: widget.coffee.color,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        switchValue = value;
+                                      });
+                                    }),
                                 const SizedBox(width: 10),
                                 const Text(
                                   "S",
                                   style: TextStyle(
-                                    fontWeight: FontWeight.w700,
                                     fontSize: 30,
+                                    fontWeight: FontWeight.w700,
                                   ),
-                                ),
+                                )
                               ],
                             ),
                             SizedBox(height: size.height * 0.055),
@@ -280,7 +270,7 @@ class _CoffeeDetailsState extends State<CoffeeDetails> {
                                 color: widget.coffee.color,
                                 borderRadius: BorderRadius.circular(20),
                               ),
-                              child: const Center(
+                              child:const Center(
                                 child: Text(
                                   "Order Now",
                                   style: TextStyle(
@@ -290,10 +280,10 @@ class _CoffeeDetailsState extends State<CoffeeDetails> {
                                   ),
                                 ),
                               ),
-                            ),
+                            )
                           ],
                         ),
-                      ),
+                      )
                     ],
                   )
                 ],
