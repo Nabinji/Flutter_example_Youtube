@@ -91,12 +91,10 @@ class _CoffeeDetailsState extends State<CoffeeDetails> {
                           children: [
                             // for back and favorite button
                             Row(
-                              mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 IconButton(
-                                  onPressed: () =>
-                                      Navigator.of(context).pop(),
+                                  onPressed: () => Navigator.of(context).pop(),
                                   iconSize: 40,
                                   icon: Icon(
                                     Icons.arrow_back_ios,
@@ -162,8 +160,7 @@ class _CoffeeDetailsState extends State<CoffeeDetails> {
                             ),
                             SizedBox(height: size.height * 0.06),
                             Row(
-                              mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 SizedBox(
@@ -179,15 +176,13 @@ class _CoffeeDetailsState extends State<CoffeeDetails> {
                                 ),
                                 // no of quantity
                                 Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Container(
                                       height: 35,
                                       width: 35,
                                       decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(5),
+                                        borderRadius: BorderRadius.circular(5),
                                         color: widget.coffee.color,
                                       ),
                                       child: GestureDetector(
@@ -222,8 +217,7 @@ class _CoffeeDetailsState extends State<CoffeeDetails> {
                                       height: 35,
                                       width: 35,
                                       decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(5),
+                                        borderRadius: BorderRadius.circular(5),
                                         color: widget.coffee.color,
                                       ),
                                       child: GestureDetector(
@@ -290,9 +284,10 @@ class _CoffeeDetailsState extends State<CoffeeDetails> {
                                 child: Text(
                                   "Order Now",
                                   style: TextStyle(
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 30,
-                                      color: Colors.black),
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 30,
+                                    color: Colors.black,
+                                  ),
                                 ),
                               ),
                             ),
@@ -303,7 +298,7 @@ class _CoffeeDetailsState extends State<CoffeeDetails> {
                   )
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
