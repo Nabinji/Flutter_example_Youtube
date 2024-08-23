@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_example/Bmi%20Calculator/bmi_calculator.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_example/Flutter%20UI/Coffee%20Shope%20App%20UI/View/login_screen.dart';
 
-import 'Bmi Calculator/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,14 +12,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => BMIProvider()),
-      ],
-      child: const MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: BmiCalculator(),
-      ),
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: LoginScreen(),
     );
   }
 }

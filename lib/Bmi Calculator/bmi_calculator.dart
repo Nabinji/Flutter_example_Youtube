@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_example/Bmi%20Calculator/provider.dart';
 import 'package:provider/provider.dart';
-
-import 'provider.dart';
 
 class BmiCalculator extends StatelessWidget {
   const BmiCalculator({super.key});
@@ -11,13 +10,12 @@ class BmiCalculator extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.blue[100],
       appBar: AppBar(
-        title: const Text('BMI Calculator App'),
+        title: const Text("BMI Calculator App"),
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
-        elevation: 0,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(15),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -25,12 +23,10 @@ class BmiCalculator extends StatelessWidget {
               controller: context.read<BMIProvider>().heightController,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
-                labelText: 'Height (cm)',
-                labelStyle: const TextStyle(
-                  color: Colors.black,
-                ),
-                filled: true,
+                labelText: "Height (cm)",
+                labelStyle: const TextStyle(color: Colors.black),
                 fillColor: Colors.white38,
+                filled: true,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
@@ -41,12 +37,10 @@ class BmiCalculator extends StatelessWidget {
               controller: context.read<BMIProvider>().weightController,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
-                labelText: 'Weight (kg)',
-                labelStyle: const TextStyle(
-                  color: Colors.black,
-                ),
-                filled: true,
+                labelText: "Weight (kg)",
+                labelStyle: const TextStyle(color: Colors.black),
                 fillColor: Colors.white38,
+                filled: true,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
@@ -55,52 +49,42 @@ class BmiCalculator extends StatelessWidget {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () => context.read<BMIProvider>().calculateBMI(),
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 50,
-                  vertical: 15,
-                ),
-                textStyle: const TextStyle(fontSize: 18),
-              ),
-              child: const Text('Calculate BMI'),
+              child: const Text("Calculate BMI"),
             ),
             const SizedBox(height: 20),
-            Consumer<BMIProvider>(
-              builder: (context, provider, child) {
-                Color categoryColor = provider.bmiCategory ==
-                            'You have a Underweight\n(BMI less than 18.5)' ||
-                        provider.bmiCategory ==
-                            'You have a Overweight\n( BMI 25 - 29.9)' ||
-                        provider.bmiCategory == 'Obesity\nBMI 30 or higher'
-                    ? Colors.red
-                    : Colors.green;
-
-                return Column(
-                  children: [
-                    Text(
-                      provider.bmi == 0
-                          ? ''
-                          : 'Your BMI: ${provider.bmi.toStringAsFixed(1)} kg/m2',
-                      style: const TextStyle(
-                        color: Colors.blue,
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
+            Consumer<BMIProvider>(builder: (context, provider, child) {
+              // it  means if the weight is over, less or obesity show it in red color otherwiser green
+              Color categoryColor = provider.bmiCategory ==
+                          "You have a UnderWeight\n(BMI less then 18.5)" ||
+                      provider.bmiCategory ==
+                          "You have a  OverWeight\n(BMI 25 - 29.9)" ||
+                      provider.bmiCategory == "Obesity\n BMI 30 or higher"
+                  ? Colors.red
+                  : Colors.green;
+              return Column(
+                children: [
+                  Text(
+                    provider.bmi == 0
+                        ? ''
+                        : "Your BMI:${provider.bmi.toStringAsFixed(1)} kg/m2",
+                    style: const TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
                     ),
-                    const SizedBox(height: 10),
-                    Text(
-                      provider.bmiCategory,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: categoryColor,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
+                  ),
+                const  SizedBox(height: 10),
+                  Text(
+                    provider.bmiCategory,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: categoryColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
                     ),
-                  ],
-                );
-              },
-            ),
+                  )
+                ],
+              );
+            })
           ],
         ),
       ),

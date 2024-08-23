@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Color backgroundColor = const Color.fromARGB(255, 241, 242, 246);
+Color myBackgroundColor = const Color.fromARGB(255, 241, 242, 246);
 Color darkShadowColor = const Color.fromARGB(255, 218, 223, 240);
 Color lightShadowColor = Colors.white;
 Color myTextColor = const Color.fromARGB(255, 112, 112, 112);

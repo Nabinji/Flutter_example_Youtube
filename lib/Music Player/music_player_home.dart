@@ -13,7 +13,7 @@ class _PlayerPageState extends State<MusicPlayerUI> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: myBackgroundColor,
       body: SafeArea(
         child: Column(
           children: [
@@ -103,7 +103,7 @@ class _PlayerPageState extends State<MusicPlayerUI> {
                   ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
-                    color: backgroundColor,
+                    color: myBackgroundColor,
                     boxShadow: [
                       BoxShadow(
                         color: lightShadowColor,
@@ -196,7 +196,7 @@ class _PlayerPageState extends State<MusicPlayerUI> {
             width: radius * 2,
             height: radius * 2,
             decoration: BoxDecoration(
-              color: backgroundColor,
+              color: myBackgroundColor,
               borderRadius: BorderRadius.circular(radius),
               boxShadow: [
                 BoxShadow(
