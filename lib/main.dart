@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'Flutter UI/Coffee Shope App UI/View/login_screen.dart';
-
+import 'package:flutter_example/Flutter%20UI/House%20Rent%20App%20UI/View/rent_house_home_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      home: HouseRentHomeScreen(),
     );
   }
 }
