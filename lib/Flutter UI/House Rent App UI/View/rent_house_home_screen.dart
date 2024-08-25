@@ -1,238 +1,254 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_example/Flutter%20UI/House%20Rent%20App%20UI/Model/house_model.dart';
+
 import 'package:flutter_example/Flutter%20UI/House%20Rent%20App%20UI/Utils/colors.dart';
-import 'package:flutter_example/Flutter%20UI/House%20Rent%20App%20UI/View/house_detail.dart';
-import '../Model/house_model.dart';
-import '../widgets/popular_place_card.dart';
-import '../widgets/recomended_card.dart';
+import 'package:flutter_example/Flutter%20UI/House%20Rent%20App%20UI/View/Widget/horizontal_scroll.dart';
+import 'package:flutter_example/Flutter%20UI/House%20Rent%20App%20UI/View/Widget/popular_place.dart';
+import 'package:flutter_example/Flutter%20UI/House%20Rent%20App%20UI/View/house_rent_detail.dart';
 
 class HouseRentHomeScreen extends StatefulWidget {
   const HouseRentHomeScreen({super.key});
 
   @override
-  _HouseRentHomeScreenState createState() => _HouseRentHomeScreenState();
+  State<HouseRentHomeScreen> createState() => _HouseRentHomeScreenState();
 }
 
 class _HouseRentHomeScreenState extends State<HouseRentHomeScreen> {
-  String? dropdownBeds = '2-4 Beds ';
-  String? dropdownFilter = 'Short by: Price';
-
+  String? dropdownBeds = "2-4 Beds ";
+  String? dropdownFilter = "Short by: Price";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kBackgroundColor,
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(155.0),
+        preferredSize: const Size.fromHeight(155),
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Column(
-              children: <Widget>[
-                ListTile(
-                  title: const Text(
-                    "My Location",
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w600,
-                      color: kFontColor,
-                    ),
-                  ),
-                  subtitle: const Row(
-                    children: [
-                      Text(
-                        "Surkhet, Nepal ",
-                        style: TextStyle(
-                          fontSize: 32,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Icon(
-                        Icons.keyboard_arrow_down,
-                        size: 30,
-                      )
-                    ],
-                  ),
-                  trailing: Container(
-                    height: 50,
-                    width: 50,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.white,
-                    ),
-                    child: const Icon(
-                      Icons.notifications,
-                      size: 30,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Row(
-                    children: <Widget>[
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 13, vertical: 5),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(12.0),
-                        ),
-                        child: DropdownButton(
-                          value: dropdownBeds,
-                          icon: const Icon(
-                            Icons.keyboard_arrow_down,
-                            size: 25.0,
-                          ),
-                          underline: Container(),
-                          onChanged: (String? beds) {
-                            setState(() {
-                              dropdownBeds = beds;
-                            });
-                          },
-                          items: ["2-4 Beds ", "2 Beds ", "3 Beds ", "4 Beds "]
-                              .map(
-                                (e) => DropdownMenuItem(
-                                  value: e,
-                                  child: Text(
-                                    e,
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              )
-                              .toList(),
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 14.0,
-                          vertical: 5,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(12.0),
-                        ),
-                        child: DropdownButton(
-                          value: dropdownFilter,
-                          icon: const Icon(
-                            Icons.keyboard_arrow_down,
-                            size: 25.0,
-                          ),
-                          underline: Container(),
-                          onChanged: (String? beds) {
-                            setState(() {
-                              dropdownFilter = beds;
-                            });
-                          },
-                          items: [
-                            "Short by: Price",
-                            "Short by: Name",
-                            "Short by: Location",
-                            "Short by: Type",
-                          ]
-                              .map(
-                                (e) => DropdownMenuItem(
-                                  value: e,
-                                  child: Text(
-                                    e,
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              )
-                              .toList(),
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-              ],
+            padding: const EdgeInsets.symmetric(
+              horizontal: 10,
             ),
+            child: topBarItems(),
           ),
         ),
       ),
       body: SingleChildScrollView(
         child: Column(
-          children: <Widget>[
-            const SizedBox(height: 15.0),
+          children: [
             SizedBox(
+              height: 370,
               width: double.infinity,
-              height: 370.0,
               child: ListView.builder(
-                itemCount: houseList.length,
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
                 physics: const BouncingScrollPhysics(),
+                itemCount: houseList.length,
                 itemBuilder: (context, index) {
-                  var room = houseList[index];
                   return GestureDetector(
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (_) => RentHouseDetail(houseRoom: room),
+                          builder: (_) => HouseRentDetail(
+                            houseRoom: houseList[index],
+                          ),
                         ),
                       );
                     },
-                    child: RecommendedCard(room: room),
+                    child: DisplayItemsHorizontal(
+                      houseRoom: houseList[index],
+                    ),
                   );
                 },
               ),
             ),
-            const SizedBox(height: 15.0),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white70,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: ListTile(
-                  title: const Text(
-                    "Popular Place",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w800,
-                      fontSize: 25,
-                    ),
-                  ),
-                  trailing: Text(
-                    "View All",
-                    style: TextStyle(
-                      fontSize: 15,
-                      decoration: TextDecoration.underline,
-                      decorationColor: kFontColor.withOpacity(0.7),
-                      color: kFontColor.withOpacity(0.7),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            const SizedBox(height: 15),
+            popularPlace(),
             ListView.builder(
-              itemCount: houseList.length,
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
               reverse: true,
               physics: const ScrollPhysics(),
+              itemCount: houseList.length,
               itemBuilder: (context, index) {
-                var room = houseList[index];
                 return GestureDetector(
                   onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => RentHouseDetail(houseRoom: room),
+                        builder: (_) => HouseRentDetail(
+                          houseRoom: houseList[index],
+                        ),
                       ),
                     );
                   },
-                  child: PopularPlaceCard(room: room),
+                  child: PopularPlaceItems(
+                    houseRoom: houseList[index],
+                  ),
                 );
               },
             ),
           ],
         ),
       ),
+    );
+  }
+
+  Padding popularPlace() {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white70,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: ListTile(
+          title: const Text(
+            "Popular Place",
+            style: TextStyle(
+              fontWeight: FontWeight.w800,
+              fontSize: 25,
+            ),
+          ),
+          trailing: Text(
+            "View All",
+            style: TextStyle(
+              fontSize: 15,
+              decoration: TextDecoration.underline,
+              decorationColor: kFontColor.withOpacity(0.7),
+              color: kFontColor.withOpacity(0.7),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Column topBarItems() {
+    return Column(
+      children: [
+        ListTile(
+          title: const Text(
+            "My Location",
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.w600,
+              color: kFontColor,
+            ),
+          ),
+          subtitle: const Row(
+            children: [
+              Text(
+                "Surkhet, Nepal ",
+                style: TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black),
+              ),
+              Icon(
+                Icons.keyboard_arrow_down,
+                size: 30,
+              ),
+            ],
+          ),
+          trailing: Container(
+            height: 50,
+            width: 50,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              color: Colors.white,
+            ),
+            child: const Icon(
+              Icons.notifications,
+              size: 30,
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 13,
+                  vertical: 5,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: DropdownButton(
+                  icon: const Icon(
+                    Icons.keyboard_arrow_down,
+                    size: 25,
+                  ),
+                  underline: Container(),
+                  value: dropdownBeds,
+                  items: ["2-4 Beds ", "2 Beds ", "1 Beds ", "4 Beds "]
+                      .map(
+                        (e) => DropdownMenuItem(
+                          value: e,
+                          child: Text(
+                            e,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      )
+                      .toList(),
+                  onChanged: (String? beds) {
+                    setState(() {
+                      dropdownBeds = beds;
+                    });
+                  },
+                ),
+              ),
+              const SizedBox(width: 10),
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 13,
+                  vertical: 5,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: DropdownButton(
+                  icon: const Icon(
+                    Icons.keyboard_arrow_down,
+                    size: 25,
+                  ),
+                  underline: Container(),
+                  value: dropdownFilter,
+                  items: [
+                    "Short by: Price",
+                    "Short by: Name",
+                    "Short by: Location",
+                    "Short by: Type",
+                  ]
+                      .map(
+                        (e) => DropdownMenuItem(
+                          value: e,
+                          child: Text(
+                            e,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      )
+                      .toList(),
+                  onChanged: (String? beds) {
+                    setState(() {
+                      dropdownFilter = beds;
+                    });
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

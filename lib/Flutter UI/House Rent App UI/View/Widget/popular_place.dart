@@ -1,76 +1,76 @@
 import 'package:flutter/material.dart';
-import '../Utils/colors.dart';
-import '../Model/house_model.dart';
+import 'package:flutter_example/Flutter%20UI/House%20Rent%20App%20UI/Model/house_model.dart';
+import 'package:flutter_example/Flutter%20UI/House%20Rent%20App%20UI/Utils/colors.dart';
 
-class PopularPlaceCard extends StatelessWidget {
-  final HouseRoom room;
-  const PopularPlaceCard({super.key, required this.room});
+class PopularPlaceItems extends StatelessWidget {
+  final HouseRoom houseRoom;
+  const PopularPlaceItems({super.key, required this.houseRoom});
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 120,
       padding: const EdgeInsets.all(5),
-      height: 120.0,
       margin: const EdgeInsets.symmetric(
-        horizontal: 18.0,
-        vertical: 8.0,
+        horizontal: 18,
+        vertical: 8,
       ),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(12.0),
+        borderRadius: BorderRadius.circular(12),
       ),
       child: Row(
-        children: <Widget>[
+        children: [
           Container(
-            width: 100.0,
-            height: 100.0,
-            margin: const EdgeInsets.symmetric(horizontal: 10.0),
+            width: 100,
+            height: 100,
+            margin: const EdgeInsets.symmetric(horizontal: 10),
             child: Stack(
-              children: <Widget>[
+              children: [
                 // for image
                 Positioned(
-                  top: 0.0,
-                  left: 0.0,
-                  right: 12.0,
-                  bottom: 12.0,
+                  top: 0,
+                  right: 12,
+                  left: 0,
+                  bottom: 12,
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20.0),
+                    borderRadius: BorderRadius.circular(20),
                     child: Image.asset(
-                      room.image,
+                      houseRoom.image,
                       fit: BoxFit.cover,
                     ),
                   ),
                 ),
                 // for rating
                 Positioned(
-                  right: 0.0,
-                  bottom: 0.0,
+                  right: 0,
+                  bottom: 0,
                   child: Card(
-                    elevation: 0.0,
+                    elevation: 0,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0),
+                      borderRadius: BorderRadius.circular(8),
                     ),
-                    color: room.color,
+                    color: houseRoom.color,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
-                        horizontal: 5.0,
-                        vertical: 2.0,
+                        horizontal: 5,
+                        vertical: 2,
                       ),
                       child: Row(
-                        children: <Widget>[
+                        children: [
                           Icon(
                             Icons.star,
-                            size: 15.0,
                             color: kBackgroundColor,
+                            size: 15,
                           ),
-                          const SizedBox(width: 3.0),
+                          const SizedBox(width: 3),
                           Text(
-                            room.rating,
+                            houseRoom.rating,
                             style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
                             ),
-                          ),
+                          )
                         ],
                       ),
                     ),
@@ -81,31 +81,31 @@ class PopularPlaceCard extends StatelessWidget {
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10.0),
+              padding: const EdgeInsets.symmetric(vertical: 10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
+                children: [
                   Text(
-                    room.name,
+                    houseRoom.name,
                     maxLines: 1,
                     style: const TextStyle(
-                      fontWeight: FontWeight.bold,
                       fontSize: 20,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
-                    room.place,
+                    houseRoom.place,
                     style: TextStyle(
-                        color: kFontColor.withOpacity(0.7),
-                        fontWeight: FontWeight.w500,
-                        fontSize: 16),
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: kFontColor.withOpacity(0.6),
+                    ),
                   ),
                   Row(
-                    children: <Widget>[
+                    children: [
                       Text(
-                        "${room.width}ft | ${room.height}ft",
-                        maxLines: 1,
+                        "${houseRoom.width}ft | ${houseRoom.height}ft",
                         style: const TextStyle(
                           fontWeight: FontWeight.w600,
                           color: Colors.black54,
@@ -113,15 +113,15 @@ class PopularPlaceCard extends StatelessWidget {
                       ),
                       const Spacer(),
                       Text(
-                        "\$ ${room.price}.00",
+                        "\$ ${houseRoom.price}.00",
                         style: const TextStyle(
-                          fontWeight: FontWeight.bold,
                           fontSize: 18,
+                          fontWeight: FontWeight.bold,
                           color: kBlueTextColor,
                         ),
                       )
                     ],
-                  ),
+                  )
                 ],
               ),
             ),

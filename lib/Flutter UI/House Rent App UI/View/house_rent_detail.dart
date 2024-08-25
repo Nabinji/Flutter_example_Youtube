@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_example/Flutter%20UI/House%20Rent%20App%20UI/Model/house_model.dart';
 import 'package:flutter_example/Flutter%20UI/House%20Rent%20App%20UI/Utils/colors.dart';
 
-class RentHouseDetail extends StatelessWidget {
+class HouseRentDetail extends StatelessWidget {
   final HouseRoom houseRoom;
-  const RentHouseDetail({super.key, required this.houseRoom});
+  const HouseRentDetail({super.key, required this.houseRoom});
 
   @override
   Widget build(BuildContext context) {
@@ -18,14 +18,14 @@ class RentHouseDetail extends StatelessWidget {
             clipBehavior: Clip.none,
             children: [
               ClipRRect(
-                borderRadius: BorderRadius.circular(35),
+                borderRadius: BorderRadius.circular(30),
                 child: Hero(
-                  tag: size.width,
+                  tag: houseRoom.image,
                   child: Image.asset(
                     houseRoom.image,
-                    width: size.width,
-                    height: size.height * 0.43,
                     fit: BoxFit.cover,
+                    height: size.height * 0.43,
+                    width: size.width,
                   ),
                 ),
               ),
@@ -61,10 +61,12 @@ class RentHouseDetail extends StatelessWidget {
                         color: Colors.white24,
                         borderRadius: BorderRadius.circular(15),
                       ),
-                      child: const Icon(
-                        Icons.more_vert,
-                        color: Colors.white,
-                        size: 35,
+                      child: const InkWell(
+                        child: Icon(
+                          Icons.more_vert,
+                          color: Colors.white,
+                          size: 35,
+                        ),
                       ),
                     )
                   ],
@@ -84,8 +86,8 @@ class RentHouseDetail extends StatelessWidget {
                   child: Center(
                     child: Text(
                       "\$ ${houseRoom.price}.00/M",
-                      style: TextStyle(
-                        color: kBlueColor,
+                      style: const TextStyle(
+                        color: kBlueTextColor,
                         fontWeight: FontWeight.bold,
                         fontSize: 25,
                       ),
@@ -98,34 +100,29 @@ class RentHouseDetail extends StatelessWidget {
                 bottom: -120,
                 right: 50,
                 child: Container(
-                  width: 50.0,
-                  height: 50.0,
+                  width: 50,
+                  height: 50,
                   decoration: BoxDecoration(
-                    color: Colors.red,
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.red.withOpacity(0.8),
-                        blurRadius: 10.0,
-                        spreadRadius: 0.1,
-                        offset: const Offset(0, 5),
-                      )
-                    ],
-                  ),
+                      color: Colors.red,
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.red.withOpacity(0.8),
+                            blurRadius: 10,
+                            offset: const Offset(0, 5))
+                      ]),
                   child: Icon(
                     Icons.bookmark,
                     color: kBackgroundColor,
-                    size: 30.0,
+                    size: 30,
                   ),
                 ),
               ),
             ],
           ),
-          SizedBox(
-            height: size.height * 0.03,
-          ),
+          SizedBox(height: size.height * 0.03),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            padding: const EdgeInsets.all(20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -135,10 +132,9 @@ class RentHouseDetail extends StatelessWidget {
                     houseRoom.name,
                     maxLines: 2,
                     style: const TextStyle(
-                      height: 1.2,
-                      
                       fontWeight: FontWeight.w800,
                       fontSize: 30,
+                      height: 1.2,
                     ),
                   ),
                 ),
@@ -169,9 +165,9 @@ class RentHouseDetail extends StatelessWidget {
                   const Text(
                     "Room Facilities",
                     style: TextStyle(
-                      height: 2,
                       fontSize: 20,
                       fontWeight: FontWeight.w700,
+                      height: 2,
                     ),
                   ),
                   Text(
@@ -181,24 +177,26 @@ class RentHouseDetail extends StatelessWidget {
                       color: kFontColor.withOpacity(0.7),
                     ),
                   ),
-                  Text(
+                  const Text(
                     "Read More",
                     style: TextStyle(
-                        height: 2,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 18,
-                        color: kBlueColor,
-                        decoration: TextDecoration.underline,
-                        decorationColor: kBlueColor),
+                      fontSize: 18,
+                      height: 2,
+                      fontWeight: FontWeight.w500,
+                      color: kBlueTextColor,
+                      decoration: TextDecoration.underline,
+                      decorationColor: kBlueTextColor,
+                    ),
                   ),
                   const SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      roomInfo("image/house-rent/icon1.png", "12.5 ft"),
-                      roomInfo("image/house-rent/icon2.png", "18.5 ft"),
-                      roomInfo("image/house-rent/icon3.png", "2 Baths"),
-                      roomInfo("image/house-rent/icon4.png", "Family"),
+                      roomInfo("image/house-rent/icon1.png", houseRoom.height),
+                      roomInfo("image/house-rent/icon2.png", houseRoom.width),
+                      roomInfo("image/house-rent/icon3.png",
+                          "${houseRoom.bath} Baths"),
+                      roomInfo("image/house-rent/icon4.png", houseRoom.type),
                     ],
                   ),
                   SizedBox(height: size.height * 0.02),
@@ -210,7 +208,7 @@ class RentHouseDetail extends StatelessWidget {
                     ),
                     child: const Center(
                       child: Padding(
-                        padding: EdgeInsets.all(22.0),
+                        padding: EdgeInsets.all(22),
                         child: Text(
                           "Book The Appartment",
                           style: TextStyle(
@@ -221,17 +219,17 @@ class RentHouseDetail extends StatelessWidget {
                         ),
                       ),
                     ),
-                  ),
+                  )
                 ],
               ),
             ),
-          ),
+          )
         ],
       ),
     );
   }
 
-  Container roomInfo(image, title) {
+  Container roomInfo(image, value) {
     return Container(
       height: 100,
       width: 80,
@@ -247,10 +245,7 @@ class RentHouseDetail extends StatelessWidget {
             height: 40,
           ),
           const SizedBox(height: 7),
-          Text(
-            title,
-            style: const TextStyle(fontWeight: FontWeight.bold),
-          )
+          Text(value)
         ],
       ),
     );
