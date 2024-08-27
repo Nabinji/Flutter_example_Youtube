@@ -57,6 +57,7 @@ dependencies:
   staggered_grid_view_flutter: ^0.0.4
   fl_chart: ^0.68.0
   smooth_star_rating_null_safety: ^1.0.4+2
+  numeral: ^3.0.0
 
 dev_dependencies:
   flutter_test:
@@ -90,6 +91,7 @@ flutter:
     - image/plant-image/
     - image/coffee-shop-image/
     - image/house-rent/
+    - assets/icons/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

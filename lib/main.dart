@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_example/Flutter%20UI/House%20Rent%20App%20UI/View/rent_house_home_screen.dart';
+import 'package:flutter_example/Flutter%20UI/X%20UI/View/x_nav_bar.dart';
+
+import 'Flutter UI/X UI/constants.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,9 +13,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HouseRentHomeScreen(),
+      theme: ThemeData(
+        appBarTheme: const AppBarTheme(
+          backgroundColor: kbackgroundColor,
+        ),
+        scaffoldBackgroundColor: kbackgroundColor,
+        colorScheme: ColorScheme.fromSeed(seedColor: kprimaryColor),
+        useMaterial3: true,
+      ),
+      home: const XBottomNavBar(),
     );
   }
 }
