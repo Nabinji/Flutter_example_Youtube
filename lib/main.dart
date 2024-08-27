@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_example/Flutter%20UI/X%20UI/View/x_nav_bar.dart';
-
-import 'Flutter UI/X UI/constants.dart';
+import 'package:flutter_example/Flutter%20UI/X%20UI/constants.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +13,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         appBarTheme: const AppBarTheme(
           backgroundColor: kbackgroundColor,
@@ -23,6 +21,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: kprimaryColor),
         useMaterial3: true,
       ),
+      debugShowCheckedModeBanner: false,
       home: const XBottomNavBar(),
     );
   }

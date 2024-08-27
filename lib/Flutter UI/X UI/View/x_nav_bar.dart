@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_example/Flutter%20UI/X%20UI/View/x_home_page.dart';
+import 'package:flutter_example/Flutter%20UI/X%20UI/constants.dart';
 import 'package:flutter_svg/svg.dart';
-import '../constants.dart';
-import 'home_screen.dart';
 
 class XBottomNavBar extends StatefulWidget {
   const XBottomNavBar({super.key});
@@ -16,12 +16,13 @@ class _XBottomNavBarState extends State<XBottomNavBar> {
   @override
   void initState() {
     page = [
-      const XHomeScreen(),
+      const XHomePage(),
       navBarPage(Icons.search),
       navBarPage(Icons.notifications),
       navBarPage(Icons.grid_view),
       navBarPage(Icons.mail),
     ];
+
     super.initState();
   }
 
@@ -30,10 +31,10 @@ class _XBottomNavBarState extends State<XBottomNavBar> {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: kbackgroundColor,
-        currentIndex: selectedIndex,
-        type: BottomNavigationBarType.fixed,
         showSelectedLabels: false,
+        currentIndex: selectedIndex,
         showUnselectedLabels: false,
+        type: BottomNavigationBarType.fixed,
         onTap: (index) {
           setState(() {
             selectedIndex = index;
@@ -41,41 +42,46 @@ class _XBottomNavBarState extends State<XBottomNavBar> {
         },
         items: [
           BottomNavigationBarItem(
-              icon: SvgPicture.asset(
-                "assets/icons/twitter-home.svg",
-                height: 25,
-                width: 25,
-                color: Colors.white,
-              ),
-              label: ""),
+            icon: SvgPicture.asset(
+              "assets/icons/twitter-home.svg",
+              height: 25,
+              width: 25,
+              color: Colors.white,
+            ),
+            label: "",
+          ),
           BottomNavigationBarItem(
-              icon: SvgPicture.asset(
-                "assets/icons/twitter-search.svg",
-                height: 25,
-                width: 25,
-              ),
-              label: ""),
+            icon: SvgPicture.asset(
+              "assets/icons/twitter-search.svg",
+              height: 25,
+              width: 25,
+            ),
+            label: "",
+          ),
           BottomNavigationBarItem(
-              icon: SvgPicture.asset(
-                "assets/icons/twitter-alert-6.svg",
-                height: 25,
-                width: 25,
-              ),
-              label: ""),
+            icon: SvgPicture.asset(
+              "assets/icons/twitter-alert-6.svg",
+              height: 25,
+              width: 25,
+            ),
+            label: "",
+          ),
           BottomNavigationBarItem(
-              icon: SvgPicture.asset(
-                "assets/icons/twitter-news.svg",
-                height: 25,
-                width: 25,
-              ),
-              label: ""),
+            icon: SvgPicture.asset(
+              "assets/icons/twitter-news.svg",
+              height: 25,
+              width: 25,
+            ),
+            label: "",
+          ),
           BottomNavigationBarItem(
-              icon: SvgPicture.asset(
-                "assets/icons/twitter-message.svg",
-                height: 25,
-                width: 25,
-              ),
-              label: ""),
+            icon: SvgPicture.asset(
+              "assets/icons/twitter-message.svg",
+              height: 25,
+              width: 25,
+            ),
+            label: "",
+          ),
         ],
       ),
       body: page[selectedIndex],
@@ -86,7 +92,7 @@ class _XBottomNavBarState extends State<XBottomNavBar> {
     return Center(
       child: Icon(
         iconName,
-        size: 100,
+        size: 150,
         color: Colors.white,
       ),
     );
