@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_example/Flutter%20UI/X%20UI/View/x_nav_bar.dart';
+import 'package:flutter_example/Flutter%20UI/Furniture%20App%20UI/View/furniture_home_page.dart';
 import 'package:flutter_example/Flutter%20UI/X%20UI/constants.dart';
 
 void main() {
@@ -12,17 +12,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        appBarTheme: const AppBarTheme(
-          backgroundColor: kbackgroundColor,
-        ),
-        scaffoldBackgroundColor: kbackgroundColor,
-        colorScheme: ColorScheme.fromSeed(seedColor: kprimaryColor),
-        useMaterial3: true,
-      ),
+    return const MaterialApp(
+      // theme: ThemeData(
+      //   appBarTheme: const AppBarTheme(
+      //     backgroundColor: kbackgroundColor,
+      //   ),
+      //   scaffoldBackgroundColor: kbackgroundColor,
+      //   colorScheme: ColorScheme.fromSeed(seedColor: kprimaryColor),
+      //   useMaterial3: true,
+      // ),
       debugShowCheckedModeBanner: false,
-      home: const XBottomNavBar(),
+      home:  FurnitureHomePage(),
     );
   }
 }

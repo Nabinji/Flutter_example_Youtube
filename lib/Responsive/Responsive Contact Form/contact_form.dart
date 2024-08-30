@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_example/Responsive%20Contact%20Form/responsive.dart';
+import 'package:flutter_example/Responsive/Responsive%20Contact%20Form/responsive.dart';
 
 class ResponsiveContactForm extends StatelessWidget {
   const ResponsiveContactForm({super.key});
