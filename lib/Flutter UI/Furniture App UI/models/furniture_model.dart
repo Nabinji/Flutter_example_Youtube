@@ -8,7 +8,7 @@ class CollectionModel {
     required this.collectionProducts,
   });
 }
-
+// it is the sample model data all the code is in description you can yous code from there
 class CollectionDetailsModel {
   final String name, price, description, imagePath;
   CollectionDetailsModel({

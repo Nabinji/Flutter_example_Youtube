@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_example/Flutter%20UI/Furniture%20App%20UI/View/furniture_home_page.dart';
-import 'package:flutter_example/Flutter%20UI/X%20UI/constants.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,16 +12,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      // theme: ThemeData(
-      //   appBarTheme: const AppBarTheme(
-      //     backgroundColor: kbackgroundColor,
-      //   ),
-      //   scaffoldBackgroundColor: kbackgroundColor,
-      //   colorScheme: ColorScheme.fromSeed(seedColor: kprimaryColor),
-      //   useMaterial3: true,
-      // ),
       debugShowCheckedModeBanner: false,
-      home:  FurnitureHomePage(),
+      home: FurnitureHomePage(),
     );
   }
 }
@@ -31,6 +22,17 @@ class MyApp extends StatelessWidget {
 
 
 
+
+
+      // theme: ThemeData(
+      //   appBarTheme: const AppBarTheme(
+      //     backgroundColor: kbackgroundColor,
+      //   ),
+      //   scaffoldBackgroundColor: kbackgroundColor,
+      //   colorScheme: ColorScheme.fromSeed(seedColor: kprimaryColor),
+      //   useMaterial3: true,
+      // ),
+      
 // for provider only
 // Widget build(BuildContext context) {
 //   return MultiProvider(

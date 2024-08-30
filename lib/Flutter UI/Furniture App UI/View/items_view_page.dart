@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-
-import '../models/furniture_model.dart';
-import '../utils/colors.dart';
-import 'items_detail_page.dart';
+import 'package:flutter_example/Flutter%20UI/Furniture%20App%20UI/View/items_detail_page.dart';
+import 'package:flutter_example/Flutter%20UI/Furniture%20App%20UI/models/furniture_model.dart';
+import 'package:flutter_example/Flutter%20UI/Furniture%20App%20UI/utils/colors.dart';
 
 class ItemsViewPage extends StatefulWidget {
   final CollectionModel collectionModel;
@@ -24,31 +23,37 @@ class _ItemsViewPageState extends State<ItemsViewPage> {
             itemCount: widget.collectionModel.collectionProducts.length,
             scrollDirection: Axis.horizontal,
             physics: const ClampingScrollPhysics(),
-            onPageChanged: (val) {
+            onPageChanged: (value) {
               setState(() {
-                pageIndex = val;
+                pageIndex = value;
               });
             },
-            itemBuilder: ((context, index) {
-              final collectImg =
+            itemBuilder: (context, index) {
+              final collectionImage =
                   widget.collectionModel.collectionProducts[index];
-              return Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(collectImg.imagePath),
-                    fit: BoxFit.fill,
+              return Hero(
+                tag: collectionImage.imagePath,
+                child: Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      fit: BoxFit.fill,
+                      image: AssetImage(collectionImage.imagePath),
+                    ),
                   ),
                 ),
               );
-            }),
+            },
           ),
+          // for back button
           Align(
             alignment: Alignment.topLeft,
             child: SafeArea(
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8),
                 child: IconButton(
-                  onPressed: () => Navigator.of(context).pop(),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                   icon: const Icon(
                     Icons.close,
                     color: Colors.white,
@@ -63,33 +68,30 @@ class _ItemsViewPageState extends State<ItemsViewPage> {
             child: Column(
               children: [
                 AnimatedContainer(
-                  duration: const Duration(milliseconds: 375),
+                  duration: const Duration(milliseconds: 400),
                   margin: const EdgeInsets.only(top: 150),
                   padding: const EdgeInsets.all(15),
                   width: 220,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
+                      borderRadius: BorderRadius.circular(20),
                       color: Colors.white70),
                   child: Center(
                     child: Text.rich(
                       TextSpan(
-                        text:
-                            "${modelData.name}\n",
-                        style: const TextStyle(
-                          color: secondaryColor,
-                          fontSize: 19,
-                        ),
-                        children: [
-                          TextSpan(
-                            text: widget.collectionModel.name,
-                            style: const TextStyle(
-                              color: secondaryColor,
-                              fontSize: 19,
-                              fontWeight: FontWeight.bold,
-                            ),
+                          text: "${modelData.name}\n",
+                          style: const TextStyle(
+                            color: secondaryColor,
+                            fontSize: 19,
                           ),
-                        ],
-                      ),
+                          children: [
+                            TextSpan(
+                              text: widget.collectionModel.name,
+                              style: const TextStyle(
+                                  color: secondaryColor,
+                                  fontSize: 19,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ]),
                     ),
                   ),
                 ),
@@ -97,7 +99,9 @@ class _ItemsViewPageState extends State<ItemsViewPage> {
                 Container(
                   height: 60,
                   width: 100,
-                  margin: const EdgeInsets.only(left: 70),
+                  margin: const EdgeInsets.only(
+                    left: 70,
+                  ),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       color: accentColor),
@@ -107,19 +111,23 @@ class _ItemsViewPageState extends State<ItemsViewPage> {
                       style: const TextStyle(
                         fontSize: 26,
                         color: Colors.white,
-                        fontWeight: FontWeight.bold
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
                 ),
-                const SizedBox(height: 15),
+                const SizedBox(height: 20),
                 Container(
-                  height: 35,
-                  width: 35,
-                  margin: const EdgeInsets.only(left: 80),
-                  padding: const EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(10),
+                  height: 40,
+                  width: 40,
+                  margin: const EdgeInsets.only(
+                    left: 80,
+                  ),
                   decoration: const BoxDecoration(
-                      shape: BoxShape.circle, color: Colors.white),
+                    shape: BoxShape.circle,
+                    color: Colors.white,
+                  ),
                   child: Container(
                     decoration: const BoxDecoration(
                       shape: BoxShape.circle,
@@ -129,12 +137,15 @@ class _ItemsViewPageState extends State<ItemsViewPage> {
                 ),
               ],
             ),
-          ),
+          )
         ],
       ),
       extendBody: true,
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 60.0, vertical: 16.0),
+        padding: EdgeInsets.symmetric(
+          horizontal: 60,
+          vertical: 16,
+        ),
         child: Container(
           height: 80,
           decoration: BoxDecoration(
@@ -145,31 +156,38 @@ class _ItemsViewPageState extends State<ItemsViewPage> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               IconButton(
-                onPressed: () => Navigator.of(context).pop(),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
                 icon: const Icon(
                   Icons.home_filled,
+                  size: 35,
                   color: Colors.white,
                 ),
               ),
-              FloatingActionButton(
-                backgroundColor: Colors.white,
-                onPressed: () => Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => ItemsDetailPage(
-                      product:
-                          widget.collectionModel.collectionProducts[pageIndex],
+              GestureDetector(
+                onTap: (){ 
+                   Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => ItemsDetailPage(
+                        collectionDetailsModel: widget
+                            .collectionModel.collectionProducts[pageIndex],
+                      ),
                     ),
-                  ),
-                ),
+                  );
+                },
                 child: const Icon(
-                  Icons.add,
-                  color: Colors.black,
+                  Icons.add_circle,
+                  size: 65,
+                  color: Colors.white,
                 ),
               ),
               IconButton(
                 onPressed: () {},
                 icon: const Icon(
                   Icons.person,
+                  size: 35,
                   color: Colors.white,
                 ),
               ),
