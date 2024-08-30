@@ -99,78 +99,79 @@ class _FurnitureHomePageState extends State<FurnitureHomePage> {
                     ),
                     itemBuilder: (context, index) {
                       final items = mockData[index];
-                      return GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) =>
-                                  ItemsViewPage(collectionModel: items),
-                            ),
-                          );
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.only(bottom: 20),
-                          child: Column(
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(20),
-                                child: Stack(
-                                  children: [
-                                    Hero(
-                                      tag: items.imagePath,
-                                    child:  Image.asset(items.imagePath),
-                                    ),
-                                    Positioned(
-                                        top: 15,
-                                        right: 15,
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
-                                              color: Colors.white),
-                                          child: const Icon(
-                                            Icons.bookmark_outline_sharp,
-                                            size: 30,
-                                            color: Colors.black45,
-                                          ),
-                                        ))
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(height: 10),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "${items.name.split(" ").first}\n${items.name.split(" ").last}",
-                                    style: const TextStyle(
-                                      fontSize: 20,
-                                      color: Colors.grey,
-                                      fontWeight: FontWeight.bold,
-                                      height: 1.1,
-                                    ),
-                                  ),
-                                  Text(
-                                    "\$${items.price}",
-                                    style: GoogleFonts.antonio(
-                                      letterSpacing: -1,
-                                      color: Colors.white,
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  )
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                      );
+                      return furnitureItems(context, items);
                     }),
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  GestureDetector furnitureItems(BuildContext context, CollectionModel items) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => ItemsViewPage(collectionModel: items),
+          ),
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 20),
+        child: Column(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Stack(
+                children: [
+                  Hero(
+                    tag: items.imagePath,
+                    child: Image.asset(items.imagePath),
+                  ),
+                  Positioned(
+                      top: 15,
+                      right: 15,
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.white),
+                        child: const Icon(
+                          Icons.bookmark_outline_sharp,
+                          size: 30,
+                          color: Colors.black45,
+                        ),
+                      ))
+                ],
+              ),
+            ),
+            const SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "${items.name.split(" ").first}\n${items.name.split(" ").last}",
+                  style: const TextStyle(
+                    fontSize: 20,
+                    color: Colors.grey,
+                    fontWeight: FontWeight.bold,
+                    height: 1.1,
+                  ),
+                ),
+                Text(
+                  "\$${items.price}",
+                  style: GoogleFonts.antonio(
+                    letterSpacing: -1,
+                    color: Colors.white,
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                  ),
+                )
+              ],
+            )
+          ],
         ),
       ),
     );

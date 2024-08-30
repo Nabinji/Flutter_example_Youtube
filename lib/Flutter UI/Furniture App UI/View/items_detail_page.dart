@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_example/Flutter%20UI/Furniture%20App%20UI/models/furniture_model.dart';
 import 'package:flutter_example/Flutter%20UI/Furniture%20App%20UI/utils/colors.dart';
 import 'package:google_fonts/google_fonts.dart';

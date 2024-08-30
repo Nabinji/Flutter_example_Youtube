@@ -141,58 +141,62 @@ class _ItemsViewPageState extends State<ItemsViewPage> {
         ],
       ),
       extendBody: true,
-      bottomNavigationBar: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: 60,
-          vertical: 16,
+      bottomNavigationBar: bottomNavBar(context),
+    );
+  }
+
+  Padding bottomNavBar(BuildContext context) {
+    return Padding(
+      padding:const EdgeInsets.symmetric(
+        horizontal: 60,
+        vertical: 16,
+      ),
+      child: Container(
+        height: 80,
+        decoration: BoxDecoration(
+          color: backgroundColor,
+          borderRadius: BorderRadius.circular(15),
         ),
-        child: Container(
-          height: 80,
-          decoration: BoxDecoration(
-            color: backgroundColor,
-            borderRadius: BorderRadius.circular(15),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: const Icon(
-                  Icons.home_filled,
-                  size: 35,
-                  color: Colors.white,
-                ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const Icon(
+                Icons.home_filled,
+                size: 35,
+                color: Colors.white,
               ),
-              GestureDetector(
-                onTap: (){ 
-                   Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => ItemsDetailPage(
-                        collectionDetailsModel: widget
-                            .collectionModel.collectionProducts[pageIndex],
-                      ),
+            ),
+            GestureDetector(
+              onTap: (){ 
+                 Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => ItemsDetailPage(
+                      collectionDetailsModel: widget
+                          .collectionModel.collectionProducts[pageIndex],
                     ),
-                  );
-                },
-                child: const Icon(
-                  Icons.add_circle,
-                  size: 65,
-                  color: Colors.white,
-                ),
+                  ),
+                );
+              },
+              child: const Icon(
+                Icons.add_circle,
+                size: 65,
+                color: Colors.white,
               ),
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.person,
-                  size: 35,
-                  color: Colors.white,
-                ),
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.person,
+                size: 35,
+                color: Colors.white,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
