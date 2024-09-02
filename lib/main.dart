@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_example/Flutter%20UI/Travel%20App%20UI/View/onboard.dart';
-import 'package:flutter_example/Flutter%20UI/Travel%20App%20UI/View/travel_home.dart';
 
 void main() {
   runApp(const MyApp());

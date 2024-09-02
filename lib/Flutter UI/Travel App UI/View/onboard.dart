@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_example/Flutter%20UI/Travel%20App%20UI/Model/onboard_model.dart';
+import 'package:flutter_example/Flutter%20UI/Travel%20App%20UI/Utils/const.dart';
 
-import '../Utils/const.dart';
-import 'travel_home.dart';
-import '../Model/onboard_model.dart';
+import 'travel_home_screen.dart';
 
 class OnBoardPage extends StatefulWidget {
   const OnBoardPage({super.key});
@@ -12,18 +12,16 @@ class OnBoardPage extends StatefulWidget {
 }
 
 class _OnBoardPageState extends State<OnBoardPage> {
-  int currentPage = 0;
-
-  Widget buildIndicator(int index) {
+  int currentIndex = 0;
+  Widget dotIndicator(int index) {
     return AnimatedContainer(
-      duration: const Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 400),
       margin: const EdgeInsets.only(right: 10),
-      width: index == currentPage ? 40 : 10,
+      width: index == currentIndex ? 40 : 10,
       height: 10,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        color: index == currentPage ? Colors.white : Colors.white54,
-      ),
+          borderRadius: BorderRadius.circular(15),
+          color: index == currentIndex ? Colors.white : Colors.white54),
     );
   }
 
@@ -33,12 +31,14 @@ class _OnBoardPageState extends State<OnBoardPage> {
       body: Stack(
         children: [
           PageView.builder(
+            onPageChanged: (value) => setState(() => currentIndex = value),
             itemCount: onboards.length,
-            onPageChanged: (value) => setState(() => currentPage = value),
-            itemBuilder: (context, index) => Image.network(
-              onboards[index].image,
-              fit: BoxFit.cover,
-            ),
+            itemBuilder: (context, index) {
+              return Image.network(
+                onboards[index].image,
+                fit: BoxFit.cover,
+              );
+            },
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 60),
@@ -47,25 +47,25 @@ class _OnBoardPageState extends State<OnBoardPage> {
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
-                  children: List.generate(onboards.length, buildIndicator),
+                  children: List.generate(onboards.length, dotIndicator),
                 ),
                 const SizedBox(height: 20),
                 Text.rich(
                   TextSpan(
                     style: const TextStyle(
                       fontSize: 45,
-                      color: Colors.white,
                       height: 1.2,
+                      color: Colors.white,
                     ),
                     children: [
                       TextSpan(
-                        text: '${onboards[currentPage].text1}\n',
+                        text: "${onboards[currentIndex].text1}\n",
                         style: const TextStyle(
                           fontWeight: FontWeight.w300,
                         ),
                       ),
                       TextSpan(
-                        text: onboards[currentPage].text2,
+                        text: "${onboards[currentIndex].text2}\n",
                         style: const TextStyle(
                           fontWeight: FontWeight.w900,
                         ),
@@ -73,27 +73,25 @@ class _OnBoardPageState extends State<OnBoardPage> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 20),
-                if (currentPage == onboards.length - 1)
+                if (currentIndex == onboards.length - 1)
                   GestureDetector(
                     onTap: () {
                       Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const TravelHomePage(),
-                        ),
-                        (route) => false,
-                      );
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const TravelHomeScreen(),
+                          ),
+                          (route) => false);
                     },
                     child: AnimatedContainer(
                       padding: const EdgeInsets.all(15),
-                      duration: const Duration(milliseconds: 500),
+                      duration: const Duration(milliseconds: 400),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
                         color: lightblue,
                       ),
                       child: const Icon(
-                        Icons.arrow_forward_ios_rounded,
+                        Icons.arrow_forward_ios,
                         color: Colors.white,
                       ),
                     ),

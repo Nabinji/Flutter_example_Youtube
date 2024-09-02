@@ -96,11 +96,8 @@ flutter:
     - image/coffee-shop-image/
     - image/house-rent/
     - assets/icons/
-    - assets/hotels/
     - assets/members/
-    - assets/mountain/
     - assets/facilities/
-    - assets/beach/
     - assets/furniture-image/
 
   # An image asset can refer to one or more resolution-specific "variants", see
