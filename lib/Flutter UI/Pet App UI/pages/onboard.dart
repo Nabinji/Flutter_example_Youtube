@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import '../const.dart';
-import '../models/onboards_model.dart';
-import 'home.dart';
+import 'package:flutter_example/Flutter%20UI/Pet%20App%20UI/Utils/const.dart';
+import 'package:flutter_example/Flutter%20UI/Pet%20App%20UI/models/onboards_model.dart';
+
+import 'pets_home_screen.dart';
 
 class PetsOnBoardingScreen extends StatefulWidget {
   const PetsOnBoardingScreen({super.key});
@@ -11,46 +12,42 @@ class PetsOnBoardingScreen extends StatefulWidget {
 }
 
 class _PetsOnBoardingScreenState extends State<PetsOnBoardingScreen> {
+  final PageController _pageController = PageController();
   int currentPage = 0;
-  final PageController _pageController =
-      PageController(); // Added PageController
-
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            height: MediaQuery.of(context).size.height * 0.7,
+            height: size.height * 0.7,
             color: Colors.white,
             child: PageView.builder(
-              controller: _pageController, // Assign PageController here
+              itemCount: onBoardData.length,
               onPageChanged: (value) {
                 setState(() {
                   currentPage = value;
                 });
               },
-              itemCount: onBoardData.length,
-              itemBuilder: (context, index) => OnBoardContent(
-                onBoard: onBoardData[index],
-              ),
+              controller: _pageController,
+              itemBuilder: (context, index) {
+                return onBoardingItems(size, index);
+              },
             ),
           ),
           GestureDetector(
             onTap: () {
               if (currentPage == onBoardData.length - 1) {
-                // If it's the last page, navigate to home
                 Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const HomePage(),
-                  ),
-                  (route) => false,
-                );
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const PetsHomeScreen(),
+                    ),
+                    (route) => false);
               } else {
-                // Otherwise, go to the next page
                 _pageController.nextPage(
                   duration: const Duration(milliseconds: 300),
                   curve: Curves.ease,
@@ -59,7 +56,7 @@ class _PetsOnBoardingScreenState extends State<PetsOnBoardingScreen> {
             },
             child: Container(
               height: 70,
-              width: MediaQuery.of(context).size.width * 0.6,
+              width: size.width * 0.6,
               decoration: BoxDecoration(
                 color: buttonColor,
                 borderRadius: BorderRadius.circular(20),
@@ -67,11 +64,11 @@ class _PetsOnBoardingScreenState extends State<PetsOnBoardingScreen> {
               child: Center(
                 child: Text(
                   currentPage == onBoardData.length - 1
-                      ? 'Get Started'
-                      : 'Continue',
+                      ? "Get Stared"
+                      : "Continue",
                   style: const TextStyle(
-                    color: Colors.white,
                     fontSize: 20,
+                    color: Colors.white,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -84,16 +81,16 @@ class _PetsOnBoardingScreenState extends State<PetsOnBoardingScreen> {
             children: [
               ...List.generate(
                 onBoardData.length,
-                (index) => indicator(index: index),
-              ),
+                (index) => indicatorForSlider(index: index),
+              )
             ],
-          ),
+          )
         ],
       ),
     );
   }
 
-  AnimatedContainer indicator({int? index}) {
+  AnimatedContainer indicatorForSlider({int? index}) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 500),
       width: currentPage == index ? 20 : 10,
@@ -105,26 +102,16 @@ class _PetsOnBoardingScreenState extends State<PetsOnBoardingScreen> {
       ),
     );
   }
-}
 
-class OnBoardContent extends StatelessWidget {
-  final OnBoards onBoard;
-  const OnBoardContent({super.key, required this.onBoard});
-
-  @override
-  Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+  Column onBoardingItems(Size size, int index) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
           height: size.height * 0.4,
           width: size.width * 0.9,
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(30),
-            ),
+            borderRadius: BorderRadius.circular(30),
           ),
           child: Stack(
             children: [
@@ -144,7 +131,7 @@ class OnBoardContent extends StatelessWidget {
                           height: 130,
                           width: 130,
                           child: Transform.rotate(
-                            angle: -11.5,
+                            angle: -11,
                             child: Image.network(
                               "https://clipart-library.com/images/rTnrpap6c.png",
                               color: pawColor1,
@@ -157,7 +144,7 @@ class OnBoardContent extends StatelessWidget {
                           height: 130,
                           width: 130,
                           child: Transform.rotate(
-                            angle: 12,
+                            angle: -12,
                             child: Image.network(
                               "https://clipart-library.com/images/rTnrpap6c.png",
                               color: pawColor1,
@@ -173,7 +160,7 @@ class OnBoardContent extends StatelessWidget {
                 bottom: 0,
                 right: 60,
                 child: Image.asset(
-                  onBoard.image,
+                  onBoardData[index].image,
                   height: 375,
                   fit: BoxFit.fill,
                 ),
@@ -185,28 +172,28 @@ class OnBoardContent extends StatelessWidget {
         const Text.rich(
           TextSpan(
             style: TextStyle(
-              height: 1.2,
+              fontSize: 35,
               color: black,
               fontWeight: FontWeight.w900,
-              fontSize: 35,
+              height: 1.2,
             ),
             children: [
-              TextSpan(text: 'Find Your '),
+              TextSpan(text: "Find You "),
               TextSpan(
-                text: 'Dream\n',
+                text: "Dream\n",
                 style: TextStyle(
                   color: Colors.lightBlue,
                   fontWeight: FontWeight.w900,
                 ),
               ),
-              TextSpan(text: 'Pet Here'),
+              TextSpan(text: "Pet Here"),
             ],
           ),
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 10),
         Text(
-          onBoard.text,
+          onBoardData[index].text,
           textAlign: TextAlign.center,
           style: const TextStyle(
             fontSize: 15.5,

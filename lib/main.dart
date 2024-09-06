@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_example/Flutter%20UI/Pet%20App%20UI/pages/onboard.dart';
 
-
 void main() {
   runApp(const MyApp());
 }
