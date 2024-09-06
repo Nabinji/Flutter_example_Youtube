@@ -164,7 +164,7 @@ class _DetailPageState extends State<DetailPage> {
                                   BoxShadow(
                                     offset: const Offset(0, 3),
                                     color: widget.cat.fav
-                                        ? red.withOpacity(0.1)
+                                        ? Colors.red.withOpacity(0.1)
                                         : black.withOpacity(0.2),
                                     blurRadius: 2,
                                     spreadRadius: 1,
@@ -176,7 +176,7 @@ class _DetailPageState extends State<DetailPage> {
                                     ? Icons.favorite_rounded
                                     : Icons.favorite_border_rounded,
                                 color: widget.cat.fav
-                                    ? red
+                                    ? Colors.red
                                     : black.withOpacity(0.6),
                               ),
                             ),
@@ -231,7 +231,7 @@ class _DetailPageState extends State<DetailPage> {
                                   ),
                                   Text(
                                     "${widget.cat.name} Owner",
-                                    style: poppins.copyWith(
+                                    style: const TextStyle(
                                       fontSize: 14,
                                       color: Colors.black54,
                                     ),
@@ -255,7 +255,7 @@ class _DetailPageState extends State<DetailPage> {
                             Container(
                               padding: const EdgeInsets.all(10),
                               decoration: BoxDecoration(
-                                color: red.withOpacity(0.2),
+                                color: Colors.red.withOpacity(0.2),
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: const Icon(
@@ -271,7 +271,7 @@ class _DetailPageState extends State<DetailPage> {
                           widget.cat.description,
                           textAlign: TextAlign.justify,
                           trimCollapsedText: 'See More',
-                          colorClickableText: orange,
+                          colorClickableText: Colors.orange,
                           trimLength: 100,
                           trimMode: TrimMode.Length,
                           style: const TextStyle(

@@ -101,7 +101,7 @@ class _PetsOnBoardingScreenState extends State<PetsOnBoardingScreen> {
       margin: const EdgeInsets.only(right: 5),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: currentPage == index ? orange : black.withOpacity(0.2),
+        color: currentPage == index ? Colors.orange : black.withOpacity(0.2),
       ),
     );
   }

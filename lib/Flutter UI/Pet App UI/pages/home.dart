@@ -97,7 +97,7 @@ class _HomePageState extends State<HomePage> {
                             width: 7,
                             decoration: const BoxDecoration(
                               shape: BoxShape.circle,
-                              color: red,
+                              color: Colors.red,
                             ),
                           ),
                         ),
@@ -247,7 +247,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           child: Text(
                             categories[index],
-                            style: poppins.copyWith(
+                            style: TextStyle(
                               color: selectedCategory == index
                                   ? Colors.white
                                   : black,
@@ -349,9 +349,9 @@ class _HomePageState extends State<HomePage> {
                                 shape: BoxShape.circle,
                                 color: buttonColor,
                               ),
-                              child: Text(
+                              child: const Text(
                                 '4',
-                                style: poppins.copyWith(
+                                style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),
                               ),
@@ -511,7 +511,7 @@ class CatItem extends StatelessWidget {
                       cat.fav
                           ? Icons.favorite_rounded
                           : Icons.favorite_outline_rounded,
-                      color: cat.fav ? red : black.withOpacity(0.6),
+                      color: cat.fav ? Colors.red : black.withOpacity(0.6),
                     ),
                   ),
                 ],
