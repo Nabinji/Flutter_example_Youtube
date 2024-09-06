@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_example/Flutter%20UI/Travel%20App%20UI/View/onboard.dart';
+import 'package:flutter_example/Flutter%20UI/Pet%20App%20UI/pages/onboard.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: OnBoardPage(),
+      home: PetsOnBoardingScreen(),
     );
   }
 }
