@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_example/Flutter%20UI/Blog%20App%20ui/View/blog_home_page.dart';
+import 'Flutter UI/Real Estate App UI/Views/register_screen.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: BlogHomePage(),
+      home: RegisterScreen(),
     );
   }
 }
@@ -24,26 +25,27 @@ class MyApp extends StatelessWidget {
 
 
 
-      // theme: ThemeData(
-      //   appBarTheme: const AppBarTheme(
-      //     backgroundColor: kbackgroundColor,
-      //   ),
-      //   scaffoldBackgroundColor: kbackgroundColor,
-      //   colorScheme: ColorScheme.fromSeed(seedColor: kprimaryColor),
-      //   useMaterial3: true,
-      // ),
-      
-// for provider only
+
+
+// theme: ThemeData(
+//   appBarTheme: const AppBarTheme(
+//     backgroundColor: kbackgroundColor,
+//   ),
+//   scaffoldBackgroundColor: kbackgroundColor,
+//   colorScheme: ColorScheme.fromSeed(seedColor: kprimaryColor),
+//   useMaterial3: true,
+// ),
+
 // Widget build(BuildContext context) {
 //   return MultiProvider(
 //     providers: [
-//       ChangeNotifierProvider<JokeProviderServices>(
-//         create: (_) => JokeProviderServices(),
+//       ChangeNotifierProvider(
+//         create: (context) => CartProvider(),
 //       ),
 //     ],
 //     child: const MaterialApp(
 //       debugShowCheckedModeBanner: false,
-//       home: JokeScreen(),
+//       home: AppOnBoardPage(),
 //     ),
 //   );
 // }

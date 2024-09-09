@@ -99,6 +99,9 @@ flutter:
     - assets/furniture-image/
     - assets/pets-image/
     - assets/blogs/
+    - assets/complete-app/category/
+    - assets/complete-app/items/
+    - assets/complete-app/onboard/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

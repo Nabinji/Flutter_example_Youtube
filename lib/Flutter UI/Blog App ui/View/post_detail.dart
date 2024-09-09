@@ -75,8 +75,11 @@ class PostDetail extends StatelessWidget {
                   children: [
                     TextSpan(
                       text: post.description,
-                      style:
-                          const TextStyle(fontSize: 20, wordSpacing: 2, height: 1.5),
+                      style: const TextStyle(
+                        fontSize: 20,
+                        wordSpacing: 2,
+                        height: 1.5,
+                      ),
                     ),
                   ]),
             ),
