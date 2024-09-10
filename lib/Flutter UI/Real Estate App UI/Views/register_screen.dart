@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_example/Flutter%20UI/Real%20Estate%20App%20UI/Views/real_estate_home_screen.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_example/Flutter%20UI/Real%20Estate%20App%20UI/Views/home_screen_real_estate.dart';
 
-class RegisterScreen extends StatefulWidget {
+class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
 
-  @override
-  _HomeScreenState createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -22,9 +18,9 @@ class _HomeScreenState extends State<RegisterScreen> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(40),
               image: const DecorationImage(
+                fit: BoxFit.cover,
                 image: NetworkImage(
                     "https://engineeringdiscoveries.com/wp-content/uploads/2021/07/Simple-House-Design-Plans-9.m-x9.0m-With-3-Bedroom.jpg"),
-                fit: BoxFit.cover,
               ),
             ),
           ),
@@ -33,28 +29,28 @@ class _HomeScreenState extends State<RegisterScreen> {
             "Discover dream house \nfrom smartphone",
             textAlign: TextAlign.center,
             style: TextStyle(
-              height: 1.2,
-              fontWeight: FontWeight.w800,
               fontSize: 30,
+              fontWeight: FontWeight.w800,
+              height: 1.2,
             ),
           ),
           const SizedBox(height: 10),
           const Text(
-            "The No. 1 App for searching and finding \nthe most suitable house with you",
+            "The No. 1 App for searching and finding \nthe most suitable house with you.",
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: Colors.black38,
               fontSize: 16,
               fontWeight: FontWeight.w300,
+              color: Colors.black38,
             ),
           ),
           const SizedBox(height: 30),
           InkWell(
             onTap: () {
-              Navigator.pushReplacement(
+              Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (_) => const RealEstateHomeScreen(),
+                  builder: (_) => const HomeScreenRealEstate(),
                 ),
               );
             },
@@ -69,9 +65,9 @@ class _HomeScreenState extends State<RegisterScreen> {
                 child: Text(
                   "Register",
                   style: TextStyle(
-                    color: Colors.white,
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
+                    color: Colors.white,
                   ),
                 ),
               ),
@@ -82,14 +78,14 @@ class _HomeScreenState extends State<RegisterScreen> {
             TextSpan(
               children: [
                 TextSpan(
-                  text: "Already have an account? ",
+                  text: "Already have an account?  ",
                   style: TextStyle(
                     fontSize: 18,
                     color: Colors.black38,
                   ),
                 ),
                 TextSpan(
-                  text: " Log In",
+                  text: "Log In",
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w600,
