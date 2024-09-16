@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'models/book.dart';
-import 'details.dart';
+import '../models/book.dart';
+import 'book_detail.dart';
 
 class BooksHome extends StatelessWidget {
   const BooksHome({super.key});
@@ -116,7 +116,7 @@ class ShowCase extends StatelessWidget {
       onTap: () => Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => Details(book),
+          builder: (context) => BooksDetailsScreen(book),
         ),
       ),
       child: Padding(
@@ -149,7 +149,7 @@ class ShowBooks extends StatelessWidget {
       onTap: () => Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => Details(book),
+          builder: (context) => BooksDetailsScreen(book),
         ),
       ),
       child: Padding(

@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating/flutter_rating.dart';
-import 'models/book.dart';
+import '../models/book.dart';
 
 bool inCart = false;
 bool isFav = false;
 
-class Details extends StatefulWidget {
+class BooksDetailsScreen extends StatefulWidget {
   final Book bookObject;
 
-  const Details(this.bookObject, {super.key});
+  const BooksDetailsScreen(this.bookObject, {super.key});
 
   @override
-  _DetailsState createState() => _DetailsState();
+  _BooksDetailsScreenState createState() => _BooksDetailsScreenState();
 }
 
-class _DetailsState extends State<Details> {
+class _BooksDetailsScreenState extends State<BooksDetailsScreen> {
   String _buttonText = "Add to cart";
   @override
   Widget build(BuildContext context) {
@@ -57,7 +57,7 @@ class _DetailsState extends State<Details> {
           ],
         ),
       ),
-      body: DetailsPageBody(widget.bookObject),
+      body: BooksDetailsScreenPageBody(widget.bookObject),
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: Colors.white,
         onPressed: () {},
@@ -125,16 +125,16 @@ class _DetailsState extends State<Details> {
   }
 }
 
-class DetailsPageBody extends StatefulWidget {
+class BooksDetailsScreenPageBody extends StatefulWidget {
   final Book bookObject;
 
-  const DetailsPageBody(this.bookObject, {super.key});
+  const BooksDetailsScreenPageBody(this.bookObject, {super.key});
 
   @override
-  _DetailsPageBodyState createState() => _DetailsPageBodyState();
+  _BooksDetailsScreenPageBodyState createState() => _BooksDetailsScreenPageBodyState();
 }
 
-class _DetailsPageBodyState extends State<DetailsPageBody> {
+class _BooksDetailsScreenPageBodyState extends State<BooksDetailsScreenPageBody> {
   @override
   Widget build(BuildContext context) {
     return ListView(
