@@ -61,6 +61,8 @@ dependencies:
   staggered_grid_view_flutter: ^0.0.4
   dotted_line: ^3.2.2
   readmore: ^3.0.0
+  iconsax: ^0.0.8
+  flutter_rating: ^2.0.2
 
 dev_dependencies:
   flutter_test:
@@ -102,6 +104,7 @@ flutter:
     - assets/complete-app/category/
     - assets/complete-app/items/
     - assets/complete-app/onboard/
+    - assets/images1/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

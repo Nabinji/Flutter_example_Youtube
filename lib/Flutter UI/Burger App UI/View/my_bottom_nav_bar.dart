@@ -42,12 +42,22 @@ class _MyBottomNavBarState extends State<MyBottomNavBar> {
           });
         },
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
           BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_cart_outlined), label: ""),
-          BottomNavigationBarItem(icon: Icon(Icons.favorite_border), label: ""),
+            icon: Icon(Icons.home),
+            label: "",
+          ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.note_add_outlined), label: ""),
+            icon: Icon(Icons.shopping_cart_outlined),
+            label: "",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite_border),
+            label: "",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.note_add_outlined),
+            label: "",
+          ),
         ],
       ),
       body: page[selectedIndex],

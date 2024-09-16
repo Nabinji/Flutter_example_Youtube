@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'Flutter UI/Real Estate App UI/Views/register_screen.dart';
+import 'package:flutter_example/Flutter%20UI/Book%20%20App%20UI/book_home_screen.dart';
 
 
 void main() {
@@ -14,16 +14,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: RegisterScreen(),
+      home: BooksHome(),
     );
   }
 }
-
-
-
-
-
-
 
 
 
