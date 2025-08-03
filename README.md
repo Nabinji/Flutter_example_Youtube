@@ -1,16 +1,14 @@
-# flutter_example
+# Flutter
+This repository contains the source code for various Flutter tutorials, including UI design, animations, hover effects for Flutter Web, simple apps, games, responsive design, and more. Some screenshots of the tutorial outputs are also attached.<br>
 
-A new Flutter project.
+Check out the channel for more details: https://www.youtube.com/@wtf-code
+<br>
 
-## Getting Started
+## Screenshots
+<div align=center> <img src = 'assets/404 error.png' width = '300' >
+<img src = 'assets/bmi.png' width = '300' ><img src = 'assets/hover 2.png' width = '850' ><img src = 'assets/hover 2.png' width = '850' ><img src = 'assets/music player.png' width = '300' ><img src = 'assets/quiz app.png' width = '300' ><img src = 'assets/quiz app.png2.png' width = '300' ><img src = 'assets/snake game.png' width = '300' ><img src = 'assets/tic tac toe.png' width = '300' ><img src = 'assets/timer.png' width = '300' ><img src = 'assets/uidesign.jpg' width = '850' > </div> <img src = 'assets/calculator.png' width = '300' >
+<img src = 'assets/burger app design.png' width = '850' >
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<br>
+<br>
+### Thanks for visiting.
